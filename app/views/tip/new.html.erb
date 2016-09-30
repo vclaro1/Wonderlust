@@ -1,0 +1,9 @@
+<h3>Fill your tip for this location over here!</h3>
+<%= form_for(@tip) do |f|%>
+<%=f.label :name%>
+<%=f.text_area :name%>
+<br>
+<%=f.label :description%>
+<%=f.text_field :description, size: 450%>
+<br>
+<%=f.submit "Upload"%>

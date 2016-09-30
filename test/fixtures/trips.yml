@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  name: MyString
+  date_start: 2016-08-19 20:49:43
+  date_end: 
+  rating: 1
+  budget: 9.99
+  spent: 9.99
+
+two:
+  user_id: 1
+  name: MyString
+  date_start: 2016-08-19 20:49:43
+  date_end: 
+  rating: 1
+  budget: 9.99
+  spent: 9.99

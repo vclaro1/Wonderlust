@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  lat: 1.5
+  long: 1.5
+  trip_id: 1
+  days: 1
+  order: 1
+  transport_id: 1
+
+two:
+  name: MyString
+  lat: 1.5
+  long: 1.5
+  trip_id: 1
+  days: 1
+  order: 1
+  transport_id: 1

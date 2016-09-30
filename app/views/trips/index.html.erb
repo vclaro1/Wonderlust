@@ -1,0 +1,30 @@
+<%if current_user %>
+<h1>Trips:</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date Start</th>
+      <th>Date End</th>
+      <th>Rating</th>
+      <th>Budget</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @trips.each do |trip| %>
+    <tr>
+      <td><%= trip.name %></td>
+      <td><%= trip.date_start %></td>
+      <td><%= trip.date_end %></td>
+      <td><%= trip.rating%></td>
+      <td><%= trip.budget%></td>
+      <td><%= link_to 'Show Trip', trip %></td>
+      <td><%= link_to 'Destroy Trip', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<h1>Don't have any trips yet? Click <%= link_to 'here', new_trip_path%> to add one</h1>
+<%else%>
+<h1>Aqui va la portada de la pagina, sino se mostraran los trips del usuario</h1>
+<%end%>
