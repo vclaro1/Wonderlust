@@ -1,5 +1,17 @@
+<head>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+</head>
+<script type="text/javascript">
+  window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload(true);
+    }
+};
+</script>
 <h1>Locations#new</h1>
-<p>Find me in app/views/locations/new.html.erb</p>
+<p>Find me in app/views/locations/new.html.ercwdcscwwwwvwvweb</p>
 <script type="text/javascript">
   var lat;
   var lng;
@@ -24,51 +36,9 @@
   <%=f.select(:travel_mode ,options_for_select([['DRIVING', 'DRIVING'], ['TRANSIT', 'TRANSIT'], ['WALKING', 'WALKING'], ['BICYCLING', 'BICYCLING'], ['FLIGHT', 'FLIGHT']]))%>
 	<%=f.submit%>
   <%end%>
-    <div class="map_canvas"></div>
+    <div id="map-container" style="width: 800px; height: 400px;">
+  <div class="map_canvas" style="width: 800px; height: 400px;"></div>
+</div>
     <h2>variables de la respuesta address_components,formatted_address,geometry,place_id,types</h2>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script>
-      $(function(){
-        
-        var options = {
-          map: ".map_canvas",
-          location: "Chile"
-        };
-        
-        $("#geocomplete").geocomplete(options);
-        
-      });
-        $(function(){
-        
-        $("#geocomplete").geocomplete()
-          .bind("geocode:result", function(event, result){
-            resultado = JSON.stringify(result.geometry.location).split(",");
-            lat = parseFloat(resultado[0].split(":")[1]);
-            lng = parseFloat(resultado[1].split(":")[1].slice(0,-1));
-            name = result.formatted_address
-            $(document).ready(function(){
-            	$("#name_field").val(name)
-            	$("#lat_field").val(lat)
-            	$("#long_field"),val(lng)
-            });
-          })
-          .bind("geocode:error", function(event, status){
-            $.log("ERROR: " + status);
-          })
-          .bind("geocode:multiple", function(event, results){
-            $.log("Multiple: " + results.length + " results found");
-          });
-        
-        $("#find").click(function(){
-          $("#geocomplete").trigger("geocode");
-        });
-        
-        
-        $("#examples a").click(function(){
-          $("#geocomplete").val($(this).text()).trigger("geocode");
-          return false;
-        });
-        
-      });
-    </script>
+<%= javascript_include_tag('geokomplete.js')%>

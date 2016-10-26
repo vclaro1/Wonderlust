@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
   def new
   	@location = Location.new
+    @trip = Trip.find(params[:trip_id])
   end
 
   def index
@@ -11,10 +12,11 @@ class LocationsController < ApplicationController
   end
 
   def create
-  	@location = current_trip.locations.build(permit_location)
+    trip = Trip.find(params[:trip_id])
+  	@location = trip.locations.build(permit_location)
   	if @location.save
   		flash[:success] = "You have succesfully created a new Location!"
-  		redirect_to trip_path(@location.trip)
+  		redirect_to trip_path(trip)
   	else	
   		flash[:error] = @location.errors.full_messages
   		redirect_to_to locations_new_path
