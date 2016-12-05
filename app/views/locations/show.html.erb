@@ -1,24 +1,14 @@
-<div class="map_canvas"></div>
-
-<%=link_to 'Add Photo', photo_new_path%>
-<%=link_to 'Add Tip', tip_new_path%>
+<%=@location.name%>
+<%=link_to 'Add Photo', new_location_photo_path(location_id: @location.id), 'data-no-turbolink' => true%>
+<%=link_to 'Add Tip', new_location_tip_path(location_id: @location.id)%>
 <h1>Other Users tips: Se desarrollara despues</h1>
 <h1>Other Users Photos: se desarrollara despues</h1>
 
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
-<script src="../geocomplete/jquery.geocomplete.js"></script>
-<script src="../gecomplete/logger.js"></script>
-<script>
-  $(function(){
-    
-    var options = {
-      map: ".map_canvas",
-      location: <%=@location.name%>
-    };
-    
-    $("#geocomplete").geocomplete(options);
-    
-  });
-</script>
+<%= javascript_include_tag('jquery.geocomplete.js') %>
+<%= javascript_include_tag('logger.js') %>
+<div id="map-container" style="width: 800px; height: 400px;">
+  <div class="map_canvas" style="width: 800px; height: 400px;"></div>
+</div>
+<%= javascript_include_tag('geokomplete.js')%>

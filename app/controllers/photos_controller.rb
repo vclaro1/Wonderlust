@@ -1,14 +1,17 @@
-class PhotoController < ApplicationController
+class PhotosController < ApplicationController
   def new
     @photo = Photo.new
+    @location = Location.find(params[:location_id])
   end
 
   def show
+    @location = Location.find(params[:location_id])
     @photo = Photo.find(params[:id])
   end
 
   def create
-    @photo = current_location.photos.build(params[:photo])
+    location = Location.find(params[:location_id])
+    @photo = location.photos.build()
     if @photo.save
       flash[:succes] = "You have succesfully added your Interest!"
       redirect_to location_path(@photo.location) #aqui en show debiera empezar a hacer lo de las locations

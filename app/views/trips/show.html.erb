@@ -17,7 +17,7 @@
   
 </script>
 <h1><%= @trip.name%></h1>
-<p>Let's start adding some <%= link_to "Locations", new_location_path(trip_id: @trip.id), 'data-no-turbolink' => true%> to it!</p>
+<p>Let's start adding some <%= link_to "Locations", new_trip_location_path(trip_id: @trip.id), 'data-no-turbolink' => true%> to it!</p>
 <p>Show here all the locations, a map and an add location button</p>
 <table class="table">
   <thead>
@@ -30,11 +30,11 @@
   <tbody>
   <% @locations.each do |loc| %>
     <tr>
-      <td><%= loc.name %></td>
+      <td><%= "Santiago" %></td>
       <td><%= loc.days %></td>
       <td>aqui iran los intereses del lugar</td>
-      <td><%= link_to 'Show Location', locations_show_path(id: loc.id)%></td>
-      <td><%= link_to 'Destroy Location', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Show Location', [@trip, loc]%></td>
+      <td><%= link_to 'Destroy Location', trip_locations_path(@trip, loc), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <script type="text/javascript">
       locs.push([<%=loc.lat%>, <%=loc.long%>, <%=loc.travel_mode%>]) 

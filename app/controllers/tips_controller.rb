@@ -1,14 +1,17 @@
-class TipController < ApplicationController
+class TipsController < ApplicationController
   def new
   	@tip = Tip.new
+    @location = Location.find(params[:location_id])
   end
 
   def show
+    @location = Location.find(params[:location_id])
   	@tip = Tip.find(params[:id])
   end
 
   def create
-  	@tip = current_location.tips.build(params[:tip])
+    location = Location.find(params[:location_id])
+  	@tip = location.tips.build(params[:tip])
   	if @tip.save
   		flash[:succes] = "You have succesfully added your Interest!"
   		redirect_to location_path(@tip.location) #aqui en show debiera empezar a hacer lo de las locations

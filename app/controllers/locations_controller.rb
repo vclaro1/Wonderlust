@@ -8,6 +8,7 @@ class LocationsController < ApplicationController
   end
 
   def show
+    @trip = Trip.find(params[:trip_id])
   	@location = Location.find(params[:id])
   end
 
