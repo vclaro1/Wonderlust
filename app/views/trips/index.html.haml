@@ -1,0 +1,15 @@
+
+- if current_user
+  #pins.transitions-enabled
+    - @trips.each do |trip|
+      .box.panel.panel-default
+        = link_to (image_tag trip.image.url), trip
+        .panel-body
+          %h2= link_to trip.name, trip
+          %h3= trip.budget, 
+          %p.user
+          Submitted by
+          = trip.user.email
+- else
+  %h1 Aqui va la portada de la pagina, sino se mostraran los trips del usuario
+

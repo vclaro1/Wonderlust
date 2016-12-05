@@ -1,0 +1,27 @@
+= simple_form_for @trip, html: { multipart: true } do |f|
+	- if @trip.errors.any?
+		#errors
+			%h2
+			= pluralize(@trip.errors.count, "error")
+			prevented this Trip from saving
+			%ul
+				- @trip.errors.full_messages.each do |msg|
+					%li = msg
+	.form-group
+		= f.label :name
+		= f.text_field :name, input_html: {class: 'form-control'}
+	.form-group
+		= f.label :date_start
+		= f.date_field :date_start
+	.form-group
+		= f.label :date_end
+		= f.date_field :date_end
+	.form-group
+		=f.label :rating
+		=f.number_field :rating , class: 'text_field', in: 1..5
+	.form-group
+		=f.label :budget_Per_Day_in_USDOLARS
+		=f.number_field :budget, :class => 'text_field', :step => 'any', :min => 0
+	.form-group
+		= f.input :image, input_html: {class: 'form-control'}
+	= f.button :submit, class: "btn btn-primary"
