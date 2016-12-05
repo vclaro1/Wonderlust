@@ -1,23 +1,23 @@
 function initialize(array) {
-    var goo         = google.maps;
-        map         = new goo.Map(document.getElementById('map'),
+    var googl         = google.maps;
+        mapp         = new googl.Map(document.getElementById('map'),
                                   {
-                                    center  : new goo.LatLng(52.52, 13.40),
+                                    center  : new googl.LatLng(52.52, 13.40),
                                     zoom    : 10
                                   }
                                  );
     var DirectionsDisp = [];
     for (i = array.length - 2; i >= 0; i--) {
-      DirectionsDisp.push(new goo.DirectionsRenderer({
-                                          map             : map,
+      DirectionsDisp.push(new googl.DirectionsRenderer({
+                                          map             : mapp,
                                           preserveViewport: true,
                                           suppressMarkers : true,
                                           polylineOptions : {strokeColor:'blue'},
                                           //panel           : document.getElementById('panel').appendChild(document.createElement('li'))
                                         }));};
 
-    App         = { map               : map,
-                    bounds            : new goo.LatLngBounds(),
+    App         = { map               : mapp,
+                    bounds            : new googl.LatLngBounds(),
                     directionsService : new goo.DirectionsService(),    
                     directionsDisplays: DirectionsDisp};
 
@@ -31,17 +31,17 @@ function initialize(array) {
                                              strokeColor: '#FF0008',
                                              strokeOpacity: 1.0,
                                              strokeWeight: 2});
-              flightPath.setMap(map);
+              flightPath.setMap(mapp);
         } else {
             var travel;
             if (array[i+1][2] == "DRIVING") {
-              travel = goo.TravelMode.DRIVING;
+              travel = googl.TravelMode.DRIVING;
             } else if (array[i+1][2] == "BICYCLING") {
-              travel = goo.TravelMode.BICYCLING;
+              travel = googl.TravelMode.BICYCLING;
             } else if (array[i+1][2] == "TRANSIT") {
-              travel = goo.TravelMode.TRANSIT;
+              travel = googl.TravelMode.TRANSIT;
             } else {
-              travel = goo.TravelMode.WALKING;
+              travel = googl.TravelMode.WALKING;
             }
             hola1 = {  origin     : {lat: array[i][0], lng: array[i][1]},
                         destination :  {lat: array[i+1][0], lng: array[i+1][1]},

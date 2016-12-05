@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :trips, :locations, :interests, :photos, :tips
+  resources :trips do
+    resources :locations  
+  end
+  resources :locations do
+    resources :interests,:photos, :tips  
+  end
   devise_for :users
   root :to => 'trips#index'
   # The priority is based upon order of creation: first created -> highest priority.

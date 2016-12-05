@@ -23,8 +23,9 @@
       <input id="geocomplete" type="text" placeholder="Type in an address" size="90" />
       <input id="find" type="button" value="find" />
     </form>
+    <h1><%=@trip%></h1>
     <pre id="logger">Log:</pre>
-    <%=form_for @location do |f|%>
+    <%=form_for [@trip ,@location] do |f|%>
 	<%=f.hidden_field :name, :id=>"name_field"%>
 	<%=f.hidden_field :lat, :id=>"lat_field"%>
 	<%=f.hidden_field :long, :id=>"long_field"%>
