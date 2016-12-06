@@ -1,23 +1,24 @@
 class TripsController < ApplicationController
+
   def new
   	@trip = Trip.new
   end
 
   def index
     if current_user
-  	 @trips = current_user.trips
+  	  @trips = Trip.all.order("created_at DESC")
     end
   end
 
   def show
   	@trip = Trip.find(params[:id])
-  	@locations = @trip.locations
+  	@locations = @trip.Location
   end
 
   def create
   	@trip = current_user.trips.build(permit_trip)
   	if @trip.save
-  		flash[:succes] = "You have succesfully created a new Trip!"
+  	  flash[:succes] = "You have succesfully created a new Trip!"
   		redirect_to trip_path(@trip) #aqui en show debiera empezar a hacer lo de las locations
   	else
   		flash[:error] = @trip.errors.full_messages
