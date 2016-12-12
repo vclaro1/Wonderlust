@@ -31,11 +31,19 @@
           </div>
 
           <div class="actions">
-            <%= f.submit "Sign up" %>
+            <%= f.submit "Log in", class: "btn btn-primary" %>
           </div>
         <% end %>
+        <h4>Or sign in using Facebook or Google account
+          <div class="button">
+            <p>
+              <%= link_to "auth/facebook" do %>
+                <%= image_tag('facebook.png', width: '40', height: '40', class: 'ing-circle') %>
+              <% end %>
+            </p>
+          </div>
+        </h4>
 
-        <%= render "devise/shared/links" %>
       </div>
     </div>
   </div>
