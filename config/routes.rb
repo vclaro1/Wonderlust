@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   resources :locations do
     resources :interests,:photos, :tips  
   end
-  devise_for :users
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks'} 
   root :to => 'trips#index'
+
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => 'user'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
