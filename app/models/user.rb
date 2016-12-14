@@ -10,25 +10,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
-  def self.find_for_google_oauth2(auth, signed_in_resource=nil)
-    data = auth.info
-    user = User.where(:provider => auth.provider, :uid => auth.uid ).first
-    if user
-      return user
-    else
-      registered_user = User.where(:email => auth.info.email).first
-      if registered_user
-        return registered_user
-      else
-        user = User.create(name: data["name"],
-          provider:auth.provider,
-          email: data["email"],
-          uid: auth.uid ,
-          password: Devise.friendly_token[0,20],
-        )
-      end
-    end
-  end
+  
   
   def self.find_for_oauth(auth, signed_in_resource = nil)
 

@@ -9,6 +9,7 @@
 </script>
 <h1><%= @trip.name%></h1>
 <p>Let's start adding some <%= link_to "Locations", new_trip_location_path(trip_id: @trip.id), 'data-no-turbolink' => true%> to it!</p>
+<p>Or maybe change some aspect <%= link_to "Edit", edit_trip_path %><%= link_to 'Delete', [@trip, @location], method: :delete, data: { confirm: 'Are you sure?' } %> </p>
 <div style='width: 800px;'>
   <div id="map" style='width: 800px; height: 400px;'></div>
 </div>

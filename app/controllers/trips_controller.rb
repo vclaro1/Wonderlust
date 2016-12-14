@@ -4,6 +4,20 @@ class TripsController < ApplicationController
   	@trip = Trip.new
   end
 
+  def edit 
+    @trip = Trip.find(params[:id]) 
+  end
+
+  def update
+    @trip = Trip.find(params[:id]) 
+    if @trip.update(permit_trip)
+      redirect_to trip_path(@trip), notice: "Trip was succesfully updated!"
+    else
+      render 'edit'
+    end
+  end
+
+
   def index
     if current_user
   	  @trips = Trip.all.order("created_at DESC")
@@ -38,7 +52,8 @@ class TripsController < ApplicationController
   end
 
   private
-  	def permit_trip
-  		params.require(:trip).permit(:name, :date_start,:date_end,:rating, :budget)
-  	end
+ 
+  def permit_trip
+  	params.require(:trip).permit(:name, :date_start,:date_end,:rating, :budget, :image)
+  end
 end

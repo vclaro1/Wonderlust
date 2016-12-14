@@ -30,7 +30,7 @@ gem 'geocoder'
 gem 'gmaps4rails'
 # Simplifica los archivos html para q sean mas didacticos
 gem 'haml', '~> 4.0', '>= 4.0.7'
-
+gem 'test-unit'
 #Para darle estilo a la pagina
 gem 'simple_form', '~> 3.3', '>= 3.3.1'
 
