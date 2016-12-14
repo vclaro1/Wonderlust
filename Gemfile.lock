@@ -72,8 +72,10 @@ GEM
       rails (>= 3.1.1)
     erubis (2.7.0)
     execjs (2.7.0)
+    geocoder (1.4.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    gmaps4rails (2.1.2)
     haml (4.0.7)
       tilt
     i18n (0.7.0)
@@ -191,6 +193,8 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   devise_security_extension
+  geocoder
+  gmaps4rails
   haml (~> 4.0, >= 4.0.7)
   jbuilder (~> 2.0)
   jquery-rails

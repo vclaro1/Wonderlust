@@ -12,7 +12,7 @@ class TripsController < ApplicationController
 
   def show
   	@trip = Trip.find(params[:id])
-  	@locations = @trip.Location
+  	@locations = @trip.locations
   end
 
   def create

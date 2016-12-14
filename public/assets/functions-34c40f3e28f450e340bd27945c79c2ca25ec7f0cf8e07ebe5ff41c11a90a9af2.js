@@ -18,7 +18,7 @@ function initialize(array) {
 
     App         = { map               : mapp,
                     bounds            : new googl.LatLngBounds(),
-                    directionsService : new googl.DirectionsService(),    
+                    directionsService : new goo.DirectionsService(),    
                     directionsDisplays: DirectionsDisp};
 
     for (i = 0; i <= DirectionsDisp.length - 1; i++) {
