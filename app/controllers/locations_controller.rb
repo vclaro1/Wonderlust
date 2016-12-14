@@ -10,6 +10,10 @@ class LocationsController < ApplicationController
   def show
     @trip = Trip.find(params[:trip_id])
   	@location = Location.find(params[:id])
+    @hash = Gmaps4rails.build_markers(@location) do |user, marker|
+      marker.lat user.latitude
+      marker.lng user.longitude
+    end
   end
 
   def create
@@ -17,7 +21,7 @@ class LocationsController < ApplicationController
   	@location = trip.locations.build(permit_location)
   	if @location.save
   		flash[:success] = "You have succesfully created a new Location!"
-  		redirect_to trip_path(trip)
+  		redirect_to [trip, @location]
   	else	
   		flash[:error] = @location.errors.full_messages
   		redirect_to_to locations_new_path
@@ -39,6 +43,6 @@ class LocationsController < ApplicationController
   private
   
   	def permit_location
-  		params.require(:location).permit(:name, :lat, :long, :days, :order, :travel_mode) #ojo que hay que ver siesque order realmente sirve
+  		params.require(:location).permit(:address, :days, :order, :travel_mode) #ojo que hay que ver siesque order realmente sirve
   	end
 end

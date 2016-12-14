@@ -1,14 +1,36 @@
-<%=@location.name%>
+<%=javascript_include_tag "//maps.google.com/maps/api/js?key=AIzaSyDz8mE8BZQh68cH9foLPNTvlM6dMrdQMfo"%>
+<%=javascript_include_tag "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"%>
+<%=javascript_include_tag '//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js'%>
+<%=@location.address%>
 <%=link_to 'Add Photo', new_location_photo_path(location_id: @location.id), 'data-no-turbolink' => true%>
 <%=link_to 'Add Tip', new_location_tip_path(location_id: @location.id)%>
+<%=link_to 'Back to Trip', @trip%>
 <h1>Other Users tips: Se desarrollara despues</h1>
 <h1>Other Users Photos: se desarrollara despues</h1>
-
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
-
-<%= javascript_include_tag('jquery.geocomplete.js') %>
-<%= javascript_include_tag('logger.js') %>
-<div id="map-container" style="width: 800px; height: 400px;">
-  <div class="map_canvas" style="width: 800px; height: 400px;"></div>
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
 </div>
-<%= javascript_include_tag('geokomplete.js')%>
+<script type="text/javascript">
+	$( document ).ready(
+		function () {
+	handler1 = Gmaps.build('Google');
+	handler1.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+	  markers = handler1.addMarkers([
+	    {
+	      "lat": <%=@location.latitude%>,
+	      "lng": <%=@location.longitude%>,
+	      "picture": {
+	        "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
+	        "width":  32,
+	        "height": 32
+	      },
+	      "infowindow": "hello!"
+	    }
+	  ]);
+	  handler1.bounds.extendWith(markers);
+	  handler1.fitMapToBounds();
+	});
+}
+		);
+	
+</script>

@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(version: 20161212161305) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string   "name"
-    t.decimal  "lat",         precision: 15, scale: 13
-    t.decimal  "long",        precision: 15, scale: 13
+    t.string   "address"
+    t.decimal  "latitude",    precision: 15, scale: 13
+    t.decimal  "longitude",   precision: 15, scale: 13
     t.integer  "trip_id"
     t.integer  "days"
     t.integer  "order"
