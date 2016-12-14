@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029000436) do
+ActiveRecord::Schema.define(version: 20161206180018) do
 
   create_table "interests", force: :cascade do |t|
     t.string   "name"
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20161029000436) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string   "name"
-    t.decimal  "lat",         precision: 15, scale: 13
-    t.decimal  "long",        precision: 15, scale: 13
+    t.string   "address"
+    t.decimal  "latitude",    precision: 15, scale: 13
+    t.decimal  "longitude",   precision: 15, scale: 13
     t.integer  "trip_id"
     t.integer  "days"
     t.integer  "order"

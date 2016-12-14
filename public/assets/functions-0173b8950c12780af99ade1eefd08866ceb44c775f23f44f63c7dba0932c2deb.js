@@ -18,7 +18,7 @@ function initialize(array) {
 
     App         = { map               : mapp,
                     bounds            : new googl.LatLngBounds(),
-                    directionsService : new googl.DirectionsService(),    
+                    directionsService : new goo.DirectionsService(),    
                     directionsDisplays: DirectionsDisp};
 
     for (i = 0; i <= DirectionsDisp.length - 1; i++) {
@@ -34,14 +34,14 @@ function initialize(array) {
               flightPath.setMap(mapp);
         } else {
             var travel;
-            if (array[i+1][2] == "WALKING") {
-              travel = googl.TravelMode.WALKING;
+            if (array[i+1][2] == "DRIVING") {
+              travel = googl.TravelMode.DRIVING;
             } else if (array[i+1][2] == "BICYCLING") {
               travel = googl.TravelMode.BICYCLING;
             } else if (array[i+1][2] == "TRANSIT") {
               travel = googl.TravelMode.TRANSIT;
             } else {
-              travel = googl.TravelMode.DRIVING;
+              travel = googl.TravelMode.WALKING;
             }
             hola1 = {  origin     : {lat: array[i][0], lng: array[i][1]},
                         destination :  {lat: array[i+1][0], lng: array[i+1][1]},
