@@ -1,20 +1,25 @@
 class TripsController < ApplicationController
-
+  before_action :find_trip, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :authenticate_user!, except: [:index, :show]
+  
   def new
   	@trip = Trip.new
   end
 
   def edit 
-    @trip = Trip.find(params[:id]) 
   end
 
-  def update
-    @trip = Trip.find(params[:id]) 
+  def update 
     if @trip.update(permit_trip)
       redirect_to trip_path(@trip), notice: "Trip was succesfully updated!"
     else
       render 'edit'
     end
+  end
+
+  def upvote
+    @trip.upvote_by current_user
+    redirect_to :back
   end
 
 
@@ -25,7 +30,6 @@ class TripsController < ApplicationController
   end
 
   def show
-  	@trip = Trip.find(params[:id])
   	@locations = @trip.locations
   end
 
@@ -41,7 +45,6 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    @trip = Trip.find(params[:id])
     if @trip.destroy    
       flash[:success] = "You have succesfully deleted the Trip!"
       redirect_to trips_path
@@ -52,7 +55,11 @@ class TripsController < ApplicationController
   end
 
   private
- 
+  
+
+  def find_trip
+    @trip = Trip.find(params[:id])
+  end
   def permit_trip
   	params.require(:trip).permit(:name, :date_start,:date_end,:rating, :budget, :image)
   end

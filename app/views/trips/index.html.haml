@@ -10,6 +10,14 @@
           %p.user
           Submitted by
           = trip.user.email
+        .panel-footer
+          .row
+            .col-md-6
+              .btn-group.pull-right
+                = link_to like_trip_path(trip), method: :put, class: "btn btn-default" do 
+                  %span.glyphicon.glyphicon-heart
+                    = trip.get_upvotes.size
+          
 - else
   %h1 Aqui va la portada de la pagina, sino se mostraran los trips del usuario
 
