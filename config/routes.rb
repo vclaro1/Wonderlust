@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root :to => 'trips#index'
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => 'user'
+  get 'sign_in', :to => 'users/sessions#new', :as => :new_session
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

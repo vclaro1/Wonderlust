@@ -1,4 +1,17 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  def self.google_oauth2
+     
+    @user = User.find_for_google_oauth2(require.env["oauth2.auth"], current_user)
+ 
+    if @user.persisted?
+      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
+      sign_in_and_redirect @user, :event => :authentication
+    else
+      session["devise.google_data"] = request.env["omniauth.auth"]
+      redirect_to new_user_registration_url
+    end
+  end
+
   def self.provides_callback_for(provider)
     class_eval %Q{
       def #{provider}
@@ -15,9 +28,13 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     }
   end
 
-  [:twitter, :facebook, :linked_in].each do |provider|
+
+
+  [:twitter, :facebook, :google_oauth2].each do |provider|
     provides_callback_for provider
   end
+
+  
 
   def after_sign_in_path_for(resource)
     if resource.email_verified?
@@ -26,4 +43,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       finish_signup_path(resource)
     end
   end
+  def finish_signup_path(resource)
+    "finish_signup_path"
+  end
+  
 end
