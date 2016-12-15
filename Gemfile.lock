@@ -228,9 +228,9 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   masonry-rails (~> 0.2.4)
+  mysql2
   omniauth-facebook
   omniauth-google-oauth2
-  mysql2
   paperclip (~> 5.1)
   rails (= 4.2.6)
   sass-rails (~> 5.0)
