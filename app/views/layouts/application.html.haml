@@ -20,7 +20,7 @@
 
       - if user_signed_in?
         %ul.nav.navbar-nav.navbar-right
-          %li= link_to raw('<span class="glyphicon glyphicon-sunglasses"></span> My Trips'), root_url
+          %li= link_to raw('<span class="glyphicon glyphicon-sunglasses"></span> My Trips'), root_path
           %li= link_to "New Trip", new_trip_path
           %li= link_to raw('<span class="glyphicon glyphicon-search"></span> Search'), new_search_path
           %li= link_to "Account", edit_user_registration_path
