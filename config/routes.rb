@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :trips do
     member do
       put 'like', to: "trips#upvote"
@@ -9,10 +10,13 @@ Rails.application.routes.draw do
   resources :locations do
     resources :interests,:photos, :tips  
   end
+
+  resources :searches
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks'} 
+
   root :to => 'trips#index'
   
-  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => 'user'
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get 'sign_in', :to => 'users/sessions#new', :as => :new_session
 
   # The priority is based upon order of creation: first created -> highest priority.

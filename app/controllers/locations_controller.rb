@@ -8,8 +8,8 @@ class LocationsController < ApplicationController
   end
 
   def show
-    @trip = Trip.find(params[:trip_id])
-  	@location = Location.find(params[:id])
+    @location = Location.find(params[:id])
+    @trip = Trip.find(@location.trip_id)
     @hash = Gmaps4rails.build_markers(@location) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude
@@ -43,6 +43,6 @@ class LocationsController < ApplicationController
   private
   
   	def permit_location
-  		params.require(:location).permit(:address, :days, :order, :travel_mode) #ojo que hay que ver siesque order realmente sirve
+  		params.require(:location).permit(:address,:country, :days, :order, :travel_mode) #ojo que hay que ver siesque order realmente sirve
   	end
 end
