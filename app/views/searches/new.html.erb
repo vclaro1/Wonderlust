@@ -1,0 +1,26 @@
+<h1>Search#new</h1>
+<p>Find me in app/views/search/new.html.erb</p>
+<%= form_for @search, html: {class: "pure_form"} do |f| %>
+
+        <div class="field" style="text-align:left">
+          <%= f.label :name %><br>
+          <%= f.text_field :name , class: "form-control"%>
+        </div>
+
+        <div class="field" style="text-align:left">
+          <br>
+          <%= f.label :continent %><br>
+          <%= f.text_field :continent , class: "form-control"%>
+        </div>
+
+        <div class="field" style="text-align:left">
+          <br>
+          <%= f.label :interests %><br>
+          <%= f.text_field :interests , class: "form-control"%>
+        </div>
+
+        <div class="actions">
+          <br>
+          <%= f.submit "Search" , class: "btn btn-large btn-primary btn-block"%>
+        </div>
+      <% end %>

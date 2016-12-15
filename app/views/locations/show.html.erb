@@ -4,6 +4,7 @@
 <%=@location.address%>
 <%=link_to 'Add Photo', new_location_photo_path(location_id: @location.id), 'data-no-turbolink' => true%>
 <%=link_to 'Add Tip', new_location_tip_path(location_id: @location.id)%>
+<%=link_to 'Add Interests', new_location_interest_path(location_id: @location.id)%>
 <%=link_to 'Back to Trip', @trip%>
 <h1>Other Users tips: Se desarrollara despues</h1>
 <h1>Other Users Photos: se desarrollara despues</h1>

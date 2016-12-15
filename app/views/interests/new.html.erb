@@ -1,2 +1,13 @@
 <h1>Interest#new</h1>
-<p>Find me in app/views/interest/new.html.erb</p>
+<%= form_for [@location,@interest], html: {class: "pure_form"} do |f| %>
+
+        <div class="field" style="text-align:left">
+          <%= f.label :name %><br>
+          <%= f.text_field :name , class: "form-control"%>
+        </div>
+
+        <div class="actions">
+          <br>
+          <%= f.submit "Submit" , class: "btn btn-large btn-primary btn-block"%>
+        </div>
+      <% end %>
