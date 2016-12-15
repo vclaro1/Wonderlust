@@ -30,6 +30,8 @@ gem 'geocoder'
 gem 'gmaps4rails'
 # Simplifica los archivos html para q sean mas didacticos
 gem 'haml', '~> 4.0', '>= 4.0.7'
+gem 'test-unit'
+
 #Para darle estilo a la pagina
 gem 'simple_form', '~> 3.3', '>= 3.3.1'
 gem 'mysql2'
@@ -37,6 +39,9 @@ gem 'acts_as_votable', '~> 0.10.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Sign in con google y facebook
+gem "omniauth-google-oauth2"
+gem 'omniauth-facebook'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
