@@ -6,7 +6,7 @@ class InterestsController < ApplicationController
 
   def create
     location = Location.find(params[:location_id])
-  	@interest = location.interests.build(params[:interest])
+  	@interest = location.interests.build(permit_interest)
   	if @interest.save
   		flash[:succes] = "You have succesfully added your Interest!"
   		redirect_to location_path(@interest.location) #aqui en show debiera empezar a hacer lo de las locations

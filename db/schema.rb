@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206180018) do
+ActiveRecord::Schema.define(version: 20161214193352) do
 
   create_table "interests", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20161206180018) do
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
     t.string   "travel_mode", limit: 255
+    t.string   "country",     limit: 255
   end
 
   create_table "photos", force: :cascade do |t|
@@ -42,6 +43,14 @@ ActiveRecord::Schema.define(version: 20161206180018) do
     t.string   "image_content_type", limit: 255
     t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "interests",  limit: 255
+    t.string   "continent",  limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "tips", force: :cascade do |t|
