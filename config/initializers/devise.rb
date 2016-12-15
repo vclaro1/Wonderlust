@@ -13,8 +13,8 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  config.omniauth :facebook, '1211301905574138', 'c721cc7c8b6dd866a93aa0c56827edb4', callback_url: "http://localhost:3000/users/auth/facebook/callback"
-  config.omniauth :google_oauth2, '438870382748-li5567i8p8lp5rfhvparnpo502ist6d0.apps.googleusercontent.com', '9vyvK79K3d-OS24hLABsnXpG', :approval_prompt=> "auto", callback_url: "http://localhost:3000/users/auth/google_oauth2/callback"
+  config.omniauth :facebook, '1731229977196079', 'ea936d09a498187133f8213bd202e429', callback_url: "http://localhost:3000/users/auth/facebook/callback"
+  config.omniauth :google_oauth2, '202558449012-51r0u2u4he632esdcltuvjmattjqpgr7.apps.googleusercontent.com', 'sUG0Ye9iubsTdURXj10d6Wyt', :approval_prompt=> "auto", callback_url: "http://localhost:3000/users/auth/google_oauth2/callback"
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
