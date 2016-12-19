@@ -1,45 +1,93 @@
 <h1>Search#show</h1>
 <p>Find me in app/views/search/show.html.erb</p>
 <h1>Search Results</h1>
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Country</th>
-			<th>Interests</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% if @search.search_locations_address.nil? %>
-			<p> No Locations Found!</p>
-		<%else %>
-			<% @search.search_locations_address.each do |location| %>
-		      <tr>
-		        <td><%= location.address %></td>
-		        <td><%= location.country %></td>
-		        <td>
-		        <%location.interests.each do |int|%>
-		        	<%= int.name %>
-		        <%end%></td>
-		        <td><%= link_to 'Show', [location.trip, location] %></td>
-		      </tr>
-			<% end %>
-		<%end%>
-		<%if @search.search_locations_country.nil?%>
-			<p> No Locations Founjndkendkd!</p>
-		<%else%>
-		<% @search.search_locations_country.each do |location| %>
-		      <tr>
-		        <td><%= location.address %></td>
-		        <td><%= location.country %></td>
-		        <td>
-		        <%location.interests.each do |int|%>
-		        	<%= int.name %>
-		        <%end%></td>
-		        <td><%= link_to 'Show', [location.trip, location] %></td>
-		      </tr>
-			<% end %>
-		<%end%>
-	</tbody>
-</table>
+<script type="text/javascript">
+	console.log(<%@search.tipo%>)
+</script>
+<%if @search.tipo == "loc"%>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Country</th>
+				<th>Interests</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if @search.search_locations_address.nil? %>
+				<p> No Locations Found!</p>
+			<%else %>
+				<% @search.search_locations_address.each do |location| %>
+			      <tr>
+			        <td><%= location.address %></td>
+			        <td><%= location.country %></td>
+			        <td>
+			        <%location.interests.each do |int|%>
+			        	<%= int.name %>
+			        <%end%></td>
+			        <td><%= link_to 'Show', [location.trip, location] %></td>
+			      </tr>
+				<% end %>
+			<%end%>
+			<%if @search.search_locations_country.nil?%>
+				<p> No Locations Founjndkendkd!</p>
+			<%else%>
+			<% @search.search_locations_country.each do |location| %>
+			      <tr>
+			        <td><%= location.address %></td>
+			        <td><%= location.country %></td>
+			        <td>
+			        <%location.interests.each do |int|%>
+			        	<%= int.name %>
+			        <%end%></td>
+			        <td><%= link_to 'Show', [location.trip, location] %></td>
+			      </tr>
+				<% end %>
+			<%end%>
+		</tbody>
+	</table>
+<%else%>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Budget</th>
+				<th>Interests</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if @search.search_locations_address.nil? %>
+				<p> No Locations Found!</p>
+			<%else %>
+				<% @search.search_locations_address.each do |location| %>
+			      <tr>
+			        <td><%= location.trip.name %></td>
+			        <td><%= location.trip.budget %></td>
+			        <td>
+			        <%location.interests.each do |int|%>
+			        	<%= int.name %>
+			        <%end%></td>
+			        <td><%= link_to 'Show', location.trip %></td>
+			      </tr>
+				<% end %>
+			<%end%>
+			<%if @search.search_locations_country.nil?%>
+				<p> No Locations Founjndkendkd!</p>
+			<%else%>
+			<% @search.search_locations_country.each do |location| %>
+			      <tr>
+			        <td><%= location.trip.name %></td>
+			        <td><%= location.trip.budget %></td>
+			        <td>
+			        <%location.interests.each do |int|%>
+			        	<%= int.name %>
+			        <%end%></td>
+			        <td><%= link_to 'Show', location.trip %></td>
+			      </tr>
+				<% end %>
+			<%end%>
+		</tbody>
+	</table>
+<%end%>
+
 
