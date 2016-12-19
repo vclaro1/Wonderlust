@@ -16,7 +16,7 @@ development:
   database: Wanderlust
   pool: 5
   username: root
-  password:
+  password: 18638
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -29,7 +29,7 @@ test:
   database: Wanderlust
   pool: 5
   username: root
-  password:
+  password: 18638
   host: localhost
 
 production:
@@ -39,5 +39,5 @@ production:
   database: Wanderlust
   pool: 5
   username: root
-  password:
+  password: 18638
   host: localhost
