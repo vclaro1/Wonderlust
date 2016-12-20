@@ -11,6 +11,13 @@ class SearchesController < ApplicationController
 
 	def show
 		@search = Search.find(params[:id])
+		if @search.search_locations_address.nil? and @search.search_locations_country.nil?
+			string = "Location"
+			if @search.tipo != "loc" 
+				string = "Trip"	
+			end
+			redirect_to new_search_path, notice: "No results for your " + string + " Search."
+		end
 	end
 
 	private

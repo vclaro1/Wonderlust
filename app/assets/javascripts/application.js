@@ -12,6 +12,7 @@
 //
 //= require gmaps/google
 //= require jquery
+//= require jquery-ui
 //= require bootstrap-sprockets
 //= require masonry/jquery.masonry
 //= require jquery_ujs

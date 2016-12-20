@@ -18,7 +18,6 @@ gem 'devise'
 gem 'devise_security_extension'
 gem "paperclip", "~> 5.1"
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
 gem 'masonry-rails', '~> 0.2.4'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -42,6 +41,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 # Sign in con google y facebook
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
+gem "jquery-rails", "~> 2.3.0"
 # Use Unicorn as the app server
 # gem 'unicorn'
 
