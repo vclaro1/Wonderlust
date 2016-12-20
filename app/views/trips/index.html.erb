@@ -4,11 +4,7 @@
       <div class="box panel panel-default">
         <div class="col-md-3"> </div>
           <%= link_to (image_tag trip.image.url(:medium)), trip %>
-        <div class="col-md-6"> </div>
-          Paises Recorridos 
-          <% trip.locations.each do |loca| %>
-          <% loc.country %>
-          <%end%>
+        
         <div class="panel-body">
           <h3>
             <%= link_to trip.name, trip %>
