@@ -37,6 +37,14 @@
             <%= f.label :sex %><br>
             <%= f.select :sex, options_for_seasons, autocomplete: "on", class: 'form-control', prompt: 'Select One' %>
           </div>
+          <br/>
+          <strong>Current Image</strong>
+          <% if @user.image.present? %>
+            <%= image_tag @user.image.url(:medium) %>
+          <% else %>
+            <%= f.input :image %>
+          <% end %>
+          <br/>
 
           <div class="form-actions">
             <%= f.button :submit, "Update", class: "btn btn-primary" %>
