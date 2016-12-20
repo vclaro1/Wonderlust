@@ -1,6 +1,6 @@
-<% if current_user %>
-  <div class="transitions-enabled" id="trips">
-    <% @trips.each do |trip| %>
+<h4> My Trips </h4>
+ <div class="transitions-enabled" id="trips">
+    <% @user.trips.each do |trip| %>
       <div class="box panel panel-default">
         <div class="col-md-3"> </div>
           <%= link_to (image_tag trip.image.url(:medium)), trip %>
@@ -27,6 +27,7 @@
                     <%= trip.get_upvotes.size %>
                   </span>
                 <% end %>
+                <%= render 'shared/actions', resource: trip %>
               </div>
             </div>
           </div>
@@ -34,7 +35,3 @@
       </div>
     <% end %>
   </div>
-<% else %>
-  <h1>Aqui va la portada de la pagina, sino se mostraran los trips del usuario </h1>
-<% end %>
-
