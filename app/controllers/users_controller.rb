@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 # GET /users/:id.:format
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup, :friends, :followers]
   before_action :check_ownership, only: [:edit, :update]
   respond_to :html, :js 
   def show
@@ -37,6 +37,9 @@ class UsersController < ApplicationController
     @followers = @user.user_followers.paginate(page: params[:page])
   end
 
+  def mentionable
+    render json: @user.following_users.as_json(only: [:id, :name]), root: false
+  end
   # GET/PATCH /users/:id/finish_signup
   def finish_signup
     # authorize! :update, @user 
