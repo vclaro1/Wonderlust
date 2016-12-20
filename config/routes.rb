@@ -13,9 +13,18 @@ Rails.application.routes.draw do
 
   resources :searches
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks'} 
-
+  resources :users do
+    member do
+      get :friends
+      get :followers
+      get :deactivate
+    end
+  end
   root :to => 'trips#index'
-  
+  # get '/users/:id', :to => 'users#show', :as => :user
+  # get '/users/:id', :to => 'users#friends', :as => :user
+  # get '/users/:id', :to => 'users#followers', :as => :user
+
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get 'sign_in', :to => 'users/sessions#new', :as => :new_session
 
