@@ -5,18 +5,31 @@ Rails.application.routes.draw do
     member do
       put 'like', to: "trips#upvote"
     end
-    resources :locations  
-    
+    resources :locations      
   end
+  
   resources :locations do
     resources :interests,:photos, :tips  
   end
+  resources :activities
 
   resources :searches
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks'} 
-
+  resources :users do
+    member do
+      get :friends
+      get :followers, :following
+      get :deactivate
+      get :mentionable
+    end
+  end
   root :to => 'trips#index'
-  
+  # get '/users/:id', :to => 'users#show', :as => :user
+  # get '/users/:id', :to => 'users#friends', :as => :user
+  # get '/users/:id', :to => 'users#followers', :as => :user
+  match :follow, to: 'follows#create', as: :follow, via: :post
+  match :find_friends, to: 'home#find_friends', as: :find_friends, via: :get
+  match :unfollow, to: 'follows#destroy', as: :unfollow, via: :post
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get 'sign_in', :to => 'users/sessions#new', :as => :new_session
   resources :users, only: [:index]
