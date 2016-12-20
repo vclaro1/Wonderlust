@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
 # GET /users/:id.:format
   before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
+  
+  def index
+    @users = User.search(params[:search])
+
   def show
     # authorize! :read, @user
   end
