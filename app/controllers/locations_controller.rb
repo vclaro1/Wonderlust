@@ -9,6 +9,7 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
+    @others = Location.where(:latitude => @location.latitude, :longitude => @location.longitude)
     @trip = Trip.find(@location.trip_id)
     @hash = Gmaps4rails.build_markers(@location) do |user, marker|
       marker.lat user.latitude
