@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
 
   def create
     location = Location.find(params[:location_id])
-    @photo = location.photos.build()
+    @photo = location.photos.build(permit_photo)
     if @photo.save
       flash[:succes] = "You have succesfully added your Interest!"
       redirect_to location_path(@photo.location) #aqui en show debiera empezar a hacer lo de las locations
@@ -36,7 +36,7 @@ class PhotosController < ApplicationController
   private
 
     def permit_photo
-      params.require(:photo).permit(:description, :date)
+      params.require(:photo).permit(:image,:description, :date)
     end
 
 end
