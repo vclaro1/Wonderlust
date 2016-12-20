@@ -21,18 +21,14 @@
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-  <%if user_signed_in?%>
-    <div class="col-sm-3 col-md-3 col-md-offset-1 col-sm-offset-0" >
-            <%= form_tag(users_path, method: :get, class: " navbar-form") do  %>
+    <ul class="nav navbar-nav navbar-right">
+            <li><% if user_signed_in? %>
+                  <%= form_tag(users_path, method: :get, class: " navbar-form") do  %>
               <%= text_field_tag :search, params[:search], placeholder: 'Find Users', class: "form-control" %>
               <%= button_tag(type: 'submit', class: "btn btn-default") do %>
                 <span class="glyphicon glyphicon-search"></span>
               <% end %>
-            <%end%>
-    </div>
-    <%end%>
-    <ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
+            <%end%></li>
                   <li>
                     <%= link_to raw('<span class="glyphicon glyphicon-sunglasses"></span> My Trips '), root_path %>
                   </li>
