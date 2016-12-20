@@ -92,6 +92,14 @@ class User < ActiveRecord::Base
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
+
+  def self.search(search)
+    if search
+      where(["name LIKE ? ", "%#{search}%"])
+    else
+      all
+    end
+  end
 end
 
 

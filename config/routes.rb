@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :search_suggestions
   resources :trips do
     member do
       put 'like', to: "trips#upvote"
@@ -31,7 +32,7 @@ Rails.application.routes.draw do
   match :unfollow, to: 'follows#destroy', as: :unfollow, via: :post
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get 'sign_in', :to => 'users/sessions#new', :as => :new_session
-
+  resources :users, only: [:index]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
