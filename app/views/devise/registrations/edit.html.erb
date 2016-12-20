@@ -16,31 +16,26 @@
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
             <% end %>
           </div>
-          <%if @user.logged_using_omniauth? request %>
-            <div class="form-inputs">
-              <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false, input_html: {class: 'form-control'} %>
-            </div>
-            <div class="form-inputs">
-              <%= f.input :password_confirmation, required: false, input_html: {class: 'form-control'} %>
-            </div>
-            <div class="form-inputs">
-              <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true, input_html: {class: 'form-control'} %>
-            </div>
-          <% else %>
-            <p> You must change your password with Google or Facebook </p>
-            
-          <%end%>
-          <div class="form-group">
+          <div class="form-inputs">
+            <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false, input_html: {class: 'form-control'} %>
+          </div>
+          <div class="form-inputs">
+            <%= f.input :password_confirmation, required: false, input_html: {class: 'form-control'} %>
+          </div>
+          <div class="form-inputs">
+            <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true, input_html: {class: 'form-control'} %>
+          </div>
+          <div class="form-inputs">
             <%= f.label :name %>
             <%= f.text_field :name, placeholder: 'Full Name', class: 'form-control' %>
           </div>
-          <div class="form-group">
-            <%= f.label :dob %>
-            <%= f.date_field :dob, placeholder: 'Date of Birth', class: 'form-control' %>
+          <div class="form-inputs">
+            <%= f.label :Date %>
+            <%= f.date_field :dob, autocomplete: "on", placeholder: 'Date of Birth', class: 'form-control' %>
           </div>
-          <div class="form-group">
+          <div class="form-inputs">
             <%= f.label :sex %><br>
-            <%= f.select :sex, options_for_seasons, class: 'form-control', prompt: 'Select One' %>
+            <%= f.select :sex, options_for_seasons, autocomplete: "on", class: 'form-control', prompt: 'Select One' %>
           </div>
 
           <div class="form-actions">

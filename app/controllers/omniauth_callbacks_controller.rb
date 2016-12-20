@@ -57,5 +57,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
   
+  private
+
+  def sign_up_params
+    params.require(:user).permit(:name, :dob, :email, :password, :password_confirmation, :age)
+  end
+
+  def account_update_params
+    params.require(:user).permit(:name, :dob, :email, :password, :password_confirmation, :age)
+  end
   
 end
