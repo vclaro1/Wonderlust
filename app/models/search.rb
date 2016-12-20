@@ -7,7 +7,6 @@ class Search < ActiveRecord::Base
 			clone = contry.clone
 			contry.each do |locs|
 					if not locs.interests.where(["name LIKE ?", "%#{interests}%"]).any? 
-						puts "entre al if"
 						clone.delete(locs)	
 					end
 			end
@@ -23,7 +22,6 @@ class Search < ActiveRecord::Base
 			clone = contry.clone
 			contry.each do |locs|
 					if not locs.interests.where(["name LIKE ?", "%#{interests}%"]).any? 
-						puts "entre al if"
 						clone.delete(locs)	
 					end
 			end
