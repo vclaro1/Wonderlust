@@ -1,7 +1,11 @@
 class TripsController < ApplicationController
   before_action :find_trip, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :load_activities, only: [:index, :show, :new, :edit]
   
+  def load_activities
+    @activities = PublicActivity::Activity.order('created_at DESC').limit(20)
+  end
   def new
   	@trip = Trip.new
   end
@@ -24,7 +28,8 @@ class TripsController < ApplicationController
 
 
   def index
-    if current_user
+    @user = current_user
+    if @user
   	  @trips = Trip.all.order("created_at DESC")
     end
   end

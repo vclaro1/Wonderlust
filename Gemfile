@@ -48,6 +48,28 @@ gem 'omniauth-facebook'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Gem para crear followers en users
+gem 'acts_as_follower', '~> 0.2.1'
+
+# Gem para sacar iconos de internet buenos
+gem "font-awesome-rails"
+
+#Gem para generar pagina de users dinamica
+gem 'will_paginate', '~> 3.1', '>= 3.1.5'
+
+#Gem para separar entre viajes publicos y privados
+gem 'public_activity', '~> 1.5'
+
+gem 'carrierwave'
+gem 'friendly_id', '~> 5.0'
+
+gem 'counter_culture', '~> 0.1.33'
+
+gem 'faker'
+gem 'populator'
+gem 'auto_html', '~>1.6.4'
+gem 'sanitize'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -59,5 +81,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
 end
 

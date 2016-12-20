@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
 # GET /users/:id.:format
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup]
+  before_action :authenticate_user!
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup, :friends, :followers]
+  before_action :check_ownership, only: [:edit, :update]
+  respond_to :html, :js 
   def show
     # authorize! :read, @user
+    @activities = PublicActivity::Activity.where(owner: @user).order(created_at: :desc).paginate(page: params[:page], per_page: 10)
+
   end
 
   # GET /users/:id/edit
@@ -24,7 +29,17 @@ class UsersController < ApplicationController
       end
     end
   end
+  def friends
+    @friends = @user.following_users.paginate(page: params[:page])
+  end
 
+  def followers
+    @followers = @user.user_followers.paginate(page: params[:page])
+  end
+
+  def mentionable
+    render json: @user.following_users.as_json(only: [:id, :name]), root: false
+  end
   # GET/PATCH /users/:id/finish_signup
   def finish_signup
     # authorize! :update, @user 
@@ -53,9 +68,12 @@ class UsersController < ApplicationController
     def set_user
       @user = User.find(params[:id])
     end
+    def check_ownership
+      redirect_to current_user, notice: 'Not Authorized' unless @user == current_user
+    end
 
     def user_params
-      accessible = [ :name, :email ] # extend with your own params
+      accessible = [ :name, :email, :dob, :sex ] # extend with your own params
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       params.require(:user).permit(accessible)
     end
