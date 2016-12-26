@@ -1,24 +1,18 @@
 <div class="transitions-enabled" id="users">
-    <%@users.each do |usr|%>
+    <%@users.each do |user|%>
       <div class="box panel panel-default">
-        <div class="col-md-3"> <%= link_to (image_tag usr.image.url(:medium)), usr %></div>
+        <div class="col-md-3"> <%= link_to (image_tag user.image.url(:medium)), user %></div>
         <div class="panel-body">
-          <h3><%= link_to usr.name, usr%></h3>
-          <p class="user">User since <%=usr.created_at%></p>
+          <h3><%= link_to user.name, user%></h3>
+          <p class="user">User since <%=user.created_at%></p>
         </div>
         <div class="panel-footer">
           <div class="row">
             <div class="col-md-6">
               <div class="btn-group pull-right">
-                  <% if usr.followed_by?(current_user) %>
-                    <%= form_tag unfollow_path(user_id: usr.id), method: :post, remote: true do %>
-                      <%= button_tag 'unfollow', class: 'btn btn-primary' %>
-                    <% end %>
-                  <% else %>
-                    <%= form_tag follow_path(user_id: usr.id), method: :post, remote: true do %>
-                      <%= button_tag 'follow', class: 'btn btn-success' %>
-                    <% end %>
-                  <% end %>
+                <% unless is_current_user?(@user) %>
+                  <%= render partial: 'follows/form', collection: @users, locals: {user: user} %>                
+                <% end %>
               </div>
             </div>
         </div>
