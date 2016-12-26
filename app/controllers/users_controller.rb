@@ -4,6 +4,15 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :finish_signup, :friends, :followers]
   before_action :check_ownership, only: [:edit, :update]
   respond_to :html, :js 
+
+
+  def index
+    @users = User.search(params[:search])
+    if not @users.present?
+      redirect_to root_path , notice: 'No matches for' + " " + params[:search]
+    end
+  end
+
   def show
     # authorize! :read, @user
     @activities = PublicActivity::Activity.where(owner: @user).order(created_at: :desc).paginate(page: params[:page], per_page: 10)
@@ -73,7 +82,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      accessible = [ :name, :email, :dob, :sex ] # extend with your own params
+      accessible = [ :name, :email, :dob, :sex, :image ] # extend with your own params
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       params.require(:user).permit(accessible)
     end

@@ -16,23 +16,19 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="/">Wanderlust</a>
+    <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-flag"></span> Wanderlust</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <div class="col-sm-3 col-md-3 col-md-offset-2 col-sm-offset-0" >
-        <form class="navbar-form" role="search">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="q">
-            <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-            </div>
-        </div>
-        </form>
-    </div>
     <ul class="nav navbar-nav navbar-right">
-      <% if user_signed_in? %>
+            <li><% if user_signed_in? %>
+                  <%= form_tag(users_path, method: :get, class: " navbar-form") do  %>
+              <%= text_field_tag :search, params[:search], placeholder: 'Find Users', class: "form-control" %>
+              <%= button_tag(type: 'submit', class: "btn btn-default") do %>
+                <span class="glyphicon glyphicon-search"></span>
+              <% end %>
+            <%end%></li>
                   <li>
                     <%= link_to raw('<span class="glyphicon glyphicon-sunglasses"></span> My Trips '), root_path %>
                   </li>
@@ -42,9 +38,7 @@
                   <li>
                     <%= link_to raw('<span class="glyphicon glyphicon-search"></span> Search '), new_search_path %>
                   </li>
-                  <li>
-                    <%= link_to "Account", edit_user_registration_path %>
-                  </li>
+                  <li><%= link_to(current_user.name, user_path(current_user)) %></li>
                   <li>
                     <%= link_to raw('<span class="glyphicon glyphicon-log-out"></span> Log Out '), destroy_user_session_path, method: :delete, confirm: "Are you sure?" %>
                   </li>
