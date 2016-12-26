@@ -1,6 +1,6 @@
 <% if current_user %>
   <div class="transitions-enabled" id="trips">
-    <% @trips.each do |trip| %>
+    <% @trips.order(:cached_votes_up).each do |trip| %>
       <div class="box panel panel-default">
         <div class="col-md-3"> </div>
           <%= link_to (image_tag trip.image.url(:medium)), trip %>
