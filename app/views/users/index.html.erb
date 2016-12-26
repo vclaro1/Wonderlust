@@ -1,18 +1,20 @@
-<div class="transitions-enabled" id="trips">
-    <%@users.each do |usr|%>
+<div class="transitions-enabled" id="users">
+    <%@users.each do |user|%>
       <div class="box panel panel-default">
-        <div class="col-md-3"> <%= link_to (image_tag usr.image.url(:medium)), usr %></div>
+        <div class="col-md-3"> <%= link_to (image_tag user.image.url(:medium)), user %></div>
         <div class="panel-body">
-          <h3><%= link_to usr.name, usr%></h3>
-          <p class="user">User since <%=usr.created_at%></p>
+          <h3><%= link_to user.name, user%></h3>
+          <p class="user">User since <%=user.created_at%></p>
         </div>
         <div class="panel-footer">
           <div class="row">
             <div class="col-md-6">
               <div class="btn-group pull-right">
-                  <span class="glyphicon glyphicon-thumbs-up"></span>
+                <% unless is_current_user?(@user) %>
+                  <%= render partial: 'follows/form', collection: @users, locals: {user: user} %>                
+                <% end %>
               </div>
             </div>
-          </div>
+        </div>
     <% end %>
 </div>

@@ -12,6 +12,13 @@ class TripsController < ApplicationController
 
   def edit 
   end
+  def my_trips
+    @user = current_user
+    if @user
+      following_ids = current_user.following_users.map(&:id)
+      @trips = Trip.where(user_id: following_ids).order("created_at DESC").paginate(page: params[:page])
+    end  
+  end
 
   def update 
     if @trip.update(permit_trip)

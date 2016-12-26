@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220184608) do
+ActiveRecord::Schema.define(version: 20161226161655) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -117,13 +117,22 @@ ActiveRecord::Schema.define(version: 20161220184608) do
     t.datetime "date_end"
     t.integer  "rating",             limit: 4
     t.decimal  "budget",                         precision: 10
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
     t.string   "image_file_name",    limit: 255
     t.string   "image_content_type", limit: 255
     t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
+    t.integer  "cached_votes_total", limit: 4,                  default: 0
+    t.integer  "cached_votes_score", limit: 4,                  default: 0
+    t.integer  "cached_votes_up",    limit: 4,                  default: 0
+    t.integer  "cached_votes_down",  limit: 4,                  default: 0
   end
+
+  add_index "trips", ["cached_votes_down"], name: "index_trips_on_cached_votes_down", using: :btree
+  add_index "trips", ["cached_votes_score"], name: "index_trips_on_cached_votes_score", using: :btree
+  add_index "trips", ["cached_votes_total"], name: "index_trips_on_cached_votes_total", using: :btree
+  add_index "trips", ["cached_votes_up"], name: "index_trips_on_cached_votes_up", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

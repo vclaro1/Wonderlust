@@ -9,7 +9,7 @@ class Trip < ActiveRecord::Base
 	include PublicActivity::Model
 	tracked only: [:create, :like], owner: proc { |_controller, model| model.user }
 
-    default_scope -> { order('created_at DESC') }
+    default_scope -> { order( 'cached_votes_total DESC') }
 
 
     validates_presence_of :user
