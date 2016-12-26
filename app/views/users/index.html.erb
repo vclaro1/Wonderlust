@@ -1,4 +1,4 @@
-<div class="transitions-enabled" id="trips">
+<div class="transitions-enabled" id="users">
     <%@users.each do |usr|%>
       <div class="box panel panel-default">
         <div class="col-md-3"> <%= link_to (image_tag usr.image.url(:medium)), usr %></div>
@@ -10,9 +10,17 @@
           <div class="row">
             <div class="col-md-6">
               <div class="btn-group pull-right">
-                  <span class="glyphicon glyphicon-thumbs-up"></span>
+                  <% if usr.followed_by?(current_user) %>
+                    <%= form_tag unfollow_path(user_id: usr.id), method: :post, remote: true do %>
+                      <%= button_tag 'unfollow', class: 'btn btn-primary' %>
+                    <% end %>
+                  <% else %>
+                    <%= form_tag follow_path(user_id: usr.id), method: :post, remote: true do %>
+                      <%= button_tag 'follow', class: 'btn btn-success' %>
+                    <% end %>
+                  <% end %>
               </div>
             </div>
-          </div>
+        </div>
     <% end %>
 </div>
