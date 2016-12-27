@@ -14,6 +14,7 @@
  *= require_tree .
  *= require_self
  *= require font-awesome
+ *= require jquery.ui.datepicker
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
