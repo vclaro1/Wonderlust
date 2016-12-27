@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
 
 
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << [:name, :password_confirmation]
