@@ -15,16 +15,17 @@
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
             <% end %>
-          </div>
-          <div class="form-inputs">
-            <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false, input_html: {class: 'form-control'} %>
-          </div>
-          <div class="form-inputs">
-            <%= f.input :password_confirmation, required: false, input_html: {class: 'form-control'} %>
-          </div>
-          <div class="form-inputs">
-            <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true, input_html: {class: 'form-control'} %>
-          </div>
+          <% if @user.identity.provider == nil %>
+            <div class="form-inputs">
+              <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false, input_html: {class: 'form-control'} %>
+            </div>
+            <div class="form-inputs">
+              <%= f.input :password_confirmation, required: false, input_html: {class: 'form-control'} %>
+            </div>
+            <div class="form-inputs">
+              <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true, input_html: {class: 'form-control'} %>
+            </div>
+          <% end %>
           <div class="form-inputs">
             <%= f.label :name %>
             <%= f.text_field :name, placeholder: 'Full Name', class: 'form-control' %>
@@ -37,10 +38,12 @@
             <%= f.label :sex %><br>
             <%= f.select :sex, options_for_seasons, autocomplete: "on", class: 'form-control', prompt: 'Select One' %>
           </div>
+
           <br/>
           <strong>Current Image</strong>
           <% if @user.image.present? %>
             <%= image_tag @user.image.url(:medium) %>
+            <%= f.input :image %>
           <% else %>
             <%= f.input :image %>
           <% end %>

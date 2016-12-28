@@ -4,27 +4,23 @@ class User < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
   acts_as_voter
+  attr_accessor :current_password
 
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
   has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
   has_many :trips, :dependent => :destroy
+  has_one :identity
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
 
 
   self.per_page = 10
+  
+  
 
-  def logged_using_omniauth? request
-    res = nil
-    omniauth = request.env["omniauth.auth"]
-    if omniauth
-      res = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
-    end
-    res  
-  end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info

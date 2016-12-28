@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :activities
 
   resources :searches
-  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks'} 
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations'} 
   resources :users do
     member do
       get :friends

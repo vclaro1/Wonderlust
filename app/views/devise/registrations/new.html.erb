@@ -29,7 +29,14 @@
             <%=f.label :image%>
             <%=f.file_field :image%>
           </div>
-
+          <div class="form-inputs">
+            <%= f.label :name %>
+            <%= f.text_field :name, placeholder: 'Full Name', class: 'form-control' %>
+          </div>
+          <div class="form-inputs">
+            <%= f.label :Date %>
+            <%= f.date_field :dob, autocomplete: "on", placeholder: 'Date of Birth', class: 'form-control' %>
+          </div>
           <div class="actions">
             <%= f.submit "Log in", class: "btn btn-primary" %>
           </div>

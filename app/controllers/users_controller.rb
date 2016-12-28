@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   before_action :check_ownership, only: [:edit, :update]
   respond_to :html, :js 
 
+  
 
   def index
     @users = User.search(params[:search])
@@ -23,7 +24,6 @@ class UsersController < ApplicationController
   def edit
     # authorize! :update, @user
   end
-
   # PATCH/PUT /users/:id.:format
   def update
     # authorize! :update, @user
