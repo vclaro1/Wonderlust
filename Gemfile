@@ -41,7 +41,8 @@ gem 'acts_as_votable', '~> 0.10.0'
 # Sign in con google y facebook
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
-gem "jquery-rails", "~> 2.3.0"
+gem "jquery-rails"
+gem 'jquery-ui-rails', '~> 4.2.1'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
