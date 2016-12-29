@@ -1,49 +1,47 @@
-<h1><%= @trip.name%></h1>
+<h1><%= @trip.name%><div style='position: absolute; right:9%; top:12%;'><%= link_to "<span class='glyphicon glyphicon-plus'></span>".html_safe, new_trip_location_path(trip_id: @trip.id), 'data-no-turbolink' => true%>
+          <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_trip_path %>
+          <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, [@trip, @location], method: :delete, data: { confirm: 'Are you sure?' } %></div></h1>
+
 <div class="row" id="pin_show">
 <div class="panel panel-default">
   <div class="panel-body">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="btn-group pull-right">
-          <%= link_to "Add Location", new_trip_location_path(trip_id: @trip.id), 'data-no-turbolink' => true%>
-          <%= link_to "Edit Trip", edit_trip_path %>
-          <%= link_to 'Delete Trip', [@trip, @location], method: :delete, data: { confirm: 'Are you sure?' } %> </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
+    <div id="map" style='height: 400px; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;'></div>
+  </div></div>
 </div>
 <%=javascript_include_tag "//maps.google.com/maps/api/js?key=AIzaSyDz8mE8BZQh68cH9foLPNTvlM6dMrdQMfo", :async => true, :defer => "defer"%>
 <%=javascript_include_tag "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js", :async => true, :defer => "defer"%>
 <%=javascript_include_tag '//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js', :async => true, :defer => "defer"%>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Days to stay</th>
-      <th>Interests</th>
-      <th>Travel Mode</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @locations.each do |loc| %>
-    <tr>
-      <td><%= loc.address %></td>
-      <td><%= loc.days %></td>
-      <td>aqui iran los intereses del lugar</td>
-      <td><%=loc.travel_mode%></td>
-      <td><%= link_to 'Show', [@trip, loc]%></td>
-      <td><%= link_to 'Delete', [@trip, loc], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <script type="text/javascript">
-      locs.push([<%=loc.latitude%>, <%=loc.longitude%>, String("<%=loc.travel_mode%>")]) 
-    </script>
+<script type="text/javascript">
+  var locs = [];
+</script>
+<div class="transitions-enabled" id="trips">
+    <% @locations.each do |loc| %>
+      <div class="box panel panel-default">
+        <div class="col-md-3"> </div>
+        <script type="text/javascript">
+          locs.push([<%=loc.latitude%>, <%=loc.longitude%>, String("<%=loc.travel_mode%>")]) 
+        </script>        
+        <div class="panel-body">
+          <h3>
+            <%= link_to loc.address, [loc.trip,loc] %>
+          </h3>
+          <p class="user"><%= loc.country %></p>
+          interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-6"> <%=loc.days%> Days</div>
+            <div class="col-md-6">
+              <div class="btn-group pull-right">
+                <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, [loc.trip, loc], method: :delete, data: { confirm: 'Are you sure?' } %> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table> <!-- only if you need custom infoboxes -->
+  </div>
+
 <script type="text/javascript">
   $( document ).ready(
   function() {
