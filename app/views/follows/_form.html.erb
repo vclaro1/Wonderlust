@@ -4,7 +4,6 @@
       <%= button_tag 'unfollow', class: 'btn btn-primary' %>
     <% end %>
   <% else %>
-  	<%= puts 'Jurga culia eri pesimo pa programar'%>
     <%= form_tag follow_path(user_id: user.id), method: :post, remote: true do %>
       <%= button_tag 'follow', class: 'btn btn-success' %>
     <% end %>
