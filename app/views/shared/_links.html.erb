@@ -12,15 +12,7 @@
     <%= link_to 'Followers', followers_user_path(current_user) %>
   </h5>
   <h5>
-    <%= fa_icon 'search' %>
-    <%= link_to('Find Friends', find_friends_path)%>
-  </h5>
-  <h5>
     <%= fa_icon 'pencil' %>
-    <%= link_to 'Edit Profile', edit_user_path(current_user) %>
-  </h5>
-  <h5>
-    <%= fa_icon 'lock' %>
-    <%= link_to 'Change password', edit_user_registration_path %>
+    <%= link_to 'Edit Profile', edit_user_registration_path(current_user) %>
   </h5>
 </div>

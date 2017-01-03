@@ -1,6 +1,6 @@
 class FollowsController < ApplicationController
   before_action :authenticate_user!
-  respond_to :js
+  respond_to :js, :html
 
   def create
     @user = User.find(params[:user_id])
