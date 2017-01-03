@@ -11,27 +11,15 @@
 <div style='width: 800px;'>
   <div id="map" style='width: 800px; height: 400px;'></div>
 </div>
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Description</th>
-		</tr>
-	</thead>
-	<tbody>
-		<%@others.each do |locs|%>
-			<%locs.tips.each do |tipz|%>
-				<th>
-					<td>tipz.name</td>
-					<td>tipz.description</td>
-					<td><%link_to [locs, tipz]%></td>
-				</th>
-			<%end%>
-			<%locs.photos.each do |photo|%>	
-			<%end%>	
-		<%end%>
-	</tbody>
-</table>
+<h3>Photos </h3>
+<div id="Photos">
+	<%= simple_fields_for :photos do |photos| %>
+    	<%= render 'photos/new', :collection => @location.photos %>
+	<% end %>
+<div id="Tips">
+	<%= simple_fields_for :tips do |tips| %>
+    	<%= render 'tips/new', :collection => @location.tips %>
+	<% end %>
 <script type="text/javascript">
 	$( document ).ready(
 		function () {

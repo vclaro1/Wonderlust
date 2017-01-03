@@ -1,0 +1,25 @@
+<div class="nested-fields">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1>Welcome to your new photo</h1>
+        </div>
+        <div class="panel-body">
+          <%= simple_form_for [@location, @photo] do |f| %>
+            <%= f.input :date, as: :datetime%>
+            <br/>
+            <strong>Current Image</strong>
+            <% if @photo.image.present? %>
+              <%= image_tag @location.photos.image.url(:medium) %>
+            <% else %>
+              <%= f.input :image %>
+            <% end %>
+            <br/>
+            <%= f.button :submit, "Submit Photo", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
