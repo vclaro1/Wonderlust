@@ -73,6 +73,6 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
   end
   def permit_trip
-  	params.require(:trip).permit(:name, :date_start,:date_end,:rating, :budget, :image)
+  	params.require(:trip).permit(:name, :date_start,:date_end,:rating, :budget, :image, :id)
   end
 end

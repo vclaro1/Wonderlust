@@ -1,7 +1,11 @@
 class LocationsController < ApplicationController
+
   def new
   	@location = Location.new
     @trip = Trip.find(params[:trip_id])
+    @location.interests.build 
+    @photos = @location.photos.build
+    @tip = @location.tips.build
   end
 
   def index
@@ -11,6 +15,8 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id])
     @others = Location.where(:latitude => @location.latitude, :longitude => @location.longitude)
     @trip = Trip.find(@location.trip_id)
+    @photo = Photo.new
+    @tip = Tip.new
     @hash = Gmaps4rails.build_markers(@location) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude
@@ -44,6 +50,7 @@ class LocationsController < ApplicationController
   private
   
   	def permit_location
-  		params.require(:location).permit(:address,:country, :days, :order, :travel_mode) #ojo que hay que ver siesque order realmente sirve
+  		params.require(:location).permit(:address,:country, :days, :order, :travel_mode, photos_attributes: [:id, :_destroy, :description, :date, :image], tips_attributes: [:name, :description, :date]) #ojo que hay que ver siesque order realmente sirve
   	end
+    
 end

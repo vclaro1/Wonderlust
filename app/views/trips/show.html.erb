@@ -1,6 +1,13 @@
-<h1><%= @trip.name%><div style='position: absolute; right:9%; top:12%;'><%= link_to "<span class='glyphicon glyphicon-plus'></span>".html_safe, new_trip_location_path(trip_id: @trip.id), 'data-no-turbolink' => true%>
-          <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_trip_path %>
-          <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, [@trip, @location], method: :delete, data: { confirm: 'Are you sure?' } %></div></h1>
+<h1><%= @trip.name%><div style='position: absolute; right:9%; top:12%;'>
+<% if current_user.id == @trip.user.id %> 
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span>".html_safe, new_trip_location_path(trip_id: @trip.id), 'data-no-turbolink' => true%>
+  <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_trip_path %>
+  <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, [@trip, @location], method: :delete, data: { confirm: 'Are you sure?' } %></div></h1>
+<% else %>
+  <%= link_to "<span class='glyphicon glyphicon-plus'></span>".html_safe%>
+  <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe%>
+  <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe %></div></h1>
+<% end %>
 
 <div class="row" id="pin_show">
 <div class="panel panel-default">

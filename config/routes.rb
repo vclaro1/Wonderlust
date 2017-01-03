@@ -9,28 +9,30 @@ Rails.application.routes.draw do
   end
   
   resources :locations do
-    resources :interests,:photos, :tips  
+    resources :interests, :photos, :tips  
   end
   resources :activities
-
+  resources :photos
+  resources :tips
   resources :searches
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations'} 
   resources :users do
     member do
       get :friends
-      get :followers, :following
+      get :followers
       get :deactivate
       get :mentionable
     end
   end
+  match :follow, to: 'follows#create', as: :follow, via: :post
+  match :unfollow, to: 'follows#destroy', as: :unfollow, via: :post
   root :to => 'trips#index'
   # get '/users/:id', :to => 'users#show', :as => :user
   # get '/users/:id', :to => 'users#friends', :as => :user
   # get '/users/:id', :to => 'users#followers', :as => :user
   get :my_trips, to: 'trips#my_trips'
-  match :follow, to: 'follows#create', as: :follow, via: :trip
+
   match :find_friends, to: 'home#find_friends', as: :find_friends, via: :get
-  match :unfollow, to: 'follows#destroy', as: :unfollow, via: :trip
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get 'sign_in', :to => 'users/sessions#new', :as => :new_session
   resources :users, only: [:index]
