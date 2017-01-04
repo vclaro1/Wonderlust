@@ -13,11 +13,11 @@ class PhotosController < ApplicationController
     location = Location.find(params[:location_id])
     @photo = location.photos.build(permit_photo)
     if @photo.save
-      flash[:succes] = "You have succesfully added your Interest!"
+      flash[:succes] = "You have succesfully added a Photo!"
       redirect_to location_path(@photo.location) #aqui en show debiera empezar a hacer lo de las locations
     else
-      flash[:error] = @photo.errors.full_messages
-      redirect_to photo_new_path
+      flash[:error] = "Error: " + @photo.errors.full_messages[0] + "."
+      redirect_to location_path(@photo.location)
     end
   end
 
@@ -28,7 +28,7 @@ class PhotosController < ApplicationController
       flash[:success] = "You have succesfully deleted the Photo"
       redirect_to location_path(@location)
     else
-      flash[:error] = @photo.errors.full_messages
+      flash[:error] = @photo.errors.full_messages[0]
       redirect_to location_path(@location)
     end
   end

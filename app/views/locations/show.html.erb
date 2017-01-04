@@ -1,25 +1,91 @@
 <%=javascript_include_tag "//maps.google.com/maps/api/js?key=AIzaSyDz8mE8BZQh68cH9foLPNTvlM6dMrdQMfo", :async => true, :defer => "defer"%>
 <%=javascript_include_tag "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js", :async => true, :defer => "defer"%>
 <%=javascript_include_tag '//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js', :async => true, :defer => "defer"%>
-<%=link_to 'Add Photo', new_location_photo_path(location_id: @location.id), 'data-no-turbolink' => true%>
-<%=link_to 'Add Tip', new_location_tip_path(location_id: @location.id)%>
-<%=link_to 'Add Interests', new_location_interest_path(location_id: @location.id)%>
-<%=link_to 'Back to Trip', @trip%>
-<h1>Other Users tips: Se desarrollara despues</h1>
-<h1>Other Users Photos: se desarrollara despues</h1>
-<h1><%=@location.address%>, <%=@location.country%></h1>
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
+<script type="text/javascript">
+	function myFunction(block, var1, var2) { 
+		document.getElementById(block).style.display="block"; 
+		document.getElementById(var1).style.display="none"; 
+		document.getElementById(var2).style.display="none"; 
+}
+	function funcion(){
+		console.log("funcionando")
+	}
+</script>
+<div class="container">
+<h1><%=@location.address%>, <%=@location.country%><div style='position: absolute; right:7%; top:12%;'>
+<a id="map_show" onclick="myFunction('pin_show', 'Photos', 'Tips')"><span class='glyphicon glyphicon-picture'></span></a>
+<a id="photo_upload" onclick="myFunction('Photos', 'Tips', 'pin_show')"><span class='glyphicon glyphicon-camera'></span></a>
+<a id="tip_upload" onclick="myFunction('Tips', 'Photos', 'pin_show')"><span class='glyphicon glyphicon-map-marker'></span></a>
+<%=link_to "<span class='glyphicon glyphicon-arrow-left'></span>".html_safe, @trip%></div></h1>
+
+<div class="row" id="pin_show">
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div id="map" style='height: 350px; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;'></div>
+  </div></div>
 </div>
-<h3>Photos </h3>
-<div id="Photos">
+
+<div class="row" id="Photos" style="display:none;">
 	<%= simple_fields_for :photos do |photos| %>
     	<%= render 'photos/new', :collection => @location.photos %>
 	<% end %>
-<div id="Tips">
+</div>
+
+<div class="row"  id="Tips" style="display:none;">
 	<%= simple_fields_for :tips do |tips| %>
     	<%= render 'tips/new', :collection => @location.tips %>
 	<% end %>
+</div>
+</div>
+<%if @location.photos.length > 0%>
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Titulo</h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="wrapper">
+	<div id="columns">
+	<% @location.photos.each do |photo|%>
+		<div id="links">
+			<div class="pin" onclick="funcion()">
+				<a href="<%=photo.image.url(:big)%> " data-gallery><img class="big" src="<%=photo.image.url(:medium)%>"></a>	
+				<img class ="img-circle" src="<%=photo.location.trip.user.image.url(:thumb)%>">
+				<b style="position:relative; bottom:30%;left:0%;"><%=photo.location.trip.user.name%></b>
+				<p><i style="right:10%;"> uploaded <%=photo.created_at.strftime('%d %B %Y')%></i></p>
+			</div>
+		</div>
+	<% end %>
+	</div>
+</div>
+<% else %>
+	<h3>No Photos found</h3>
+<% end %>
 <script type="text/javascript">
 	$( document ).ready(
 		function () {
