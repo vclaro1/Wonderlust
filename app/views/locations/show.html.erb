@@ -16,10 +16,12 @@
 	<%= simple_fields_for :photos do |photos| %>
     	<%= render 'photos/new', :collection => @location.photos %>
 	<% end %>
+</div>
 <div id="Tips">
 	<%= simple_fields_for :tips do |tips| %>
     	<%= render 'tips/new', :collection => @location.tips %>
 	<% end %>
+</div>
 <script type="text/javascript">
 	$( document ).ready(
 		function () {

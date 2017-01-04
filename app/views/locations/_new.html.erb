@@ -1,0 +1,27 @@
+<div class="nested-fields">
+  <div class="panel panel-default">
+  	<div class="col-md-3">
+	  <div class="panel-heading">
+	    <h1>Add here a new location</h1>
+	  </div>
+	  <div class="panel-body">
+	    <%= simple_form_for [@trip ,@location] do |f|%>
+		  <%=f.label :address, "Name"%>
+		  <%=f.text_field :address, class: "form-control" %>
+		  <br>
+		  <%=f.label :country, "Country"%>
+		  <%=f.text_field :country, class: "form-control" %>
+		  <br>
+		  <%=f.label :days%>
+		  <%=f.number_field :days , class: 'text_field', :step => 1%>
+		  <br>
+		<%=f.label "Travel Mode to arrive"%>
+		<%=f.select(:travel_mode ,options_for_select([['DRIVING', 'DRIVING'], ['TRANSIT', 'TRANSIT'], ['WALKING', 'WALKING'], ['BICYCLING', 'BICYCLING'], ['FLIGHT', 'FLIGHT']]))%>
+		  <%=f.submit%>
+		<%end%>
+	  </div>  
+      
+    </div>
+  </div>
+</div>
+
