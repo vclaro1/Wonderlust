@@ -47,8 +47,14 @@
         </div>
       </div>
     <% end %>
+</div>
+<% if current_user.id == @trip.user.id %> 
+  <div id="Locations">
+    <%= simple_fields_for :locations do |locations| %>
+      <%= render 'locations/new', :collection => @locations %>
+    <% end %>
   </div>
-
+<% end %>
 <script type="text/javascript">
   $( document ).ready(
   function() {

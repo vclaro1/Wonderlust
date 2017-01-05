@@ -8,6 +8,8 @@ class Location < ActiveRecord::Base
 	accepts_nested_attributes_for :photos, allow_destroy: true, reject_if: :all_blank
 	accepts_nested_attributes_for :tips, allow_destroy: true
 	accepts_nested_attributes_for :interests, allow_destroy: true
+	include PublicActivity::Model
+	tracked
 	def full_address
 		[country, address].compact.join(", ")
 	end

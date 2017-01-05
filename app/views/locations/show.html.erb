@@ -30,12 +30,12 @@
     	<%= render 'photos/new', :collection => @location.photos %>
 	<% end %>
 </div>
-
 <div class="row"  id="Tips" style="display:none;">
 	<%= simple_fields_for :tips do |tips| %>
     	<%= render 'tips/new', :collection => @location.tips %>
 	<% end %>
 </div>
+
 </div>
 <%if @location.photos.length > 0%>
 <div id="blueimp-gallery" class="blueimp-gallery">
@@ -86,6 +86,7 @@
 <% else %>
 	<h3>No Photos found</h3>
 <% end %>
+
 <script type="text/javascript">
 	$( document ).ready(
 		function () {
