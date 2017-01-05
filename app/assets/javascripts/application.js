@@ -13,9 +13,18 @@
 //= require jquery
 //= require masonry/jquery.masonry
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery.ui.autocomplete
 //= require gmaps/google
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require underscore
+//= require blueimp-gallery
+//= require blueimp-gallery-fullscreen
+//= require blueimp-gallery-indicator
+//= require blueimp-gallery-video
+//= require blueimp-gallery-youtube
+//= require jquery.blueimp-gallery
+//= require bootstrap-image-gallery
 //= require_tree .
+

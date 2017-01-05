@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true  %>
   <%= csrf_meta_tags  %>
 </head>
-<body>
+<body id="body">
 <nav class="navbar navbar-default" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
@@ -56,8 +56,9 @@
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg,  class: "alert alert-info" %>
       <% end %>
+       </div>
       <%= yield %>
-    </div>
+
 
     <!-- :css
     -->
