@@ -1,6 +1,13 @@
 <h1><%= @trip.name%><div style='position: absolute; right:9%; top:12%;'>
+<script type="text/javascript">
+    function myFunction(block, var1) { 
+    document.getElementById(block).style.display="block"; 
+    document.getElementById(var1).style.display="none"; 
+}
+</script>
 <% if current_user.id == @trip.user.id %> 
-  <%= link_to "<span class='glyphicon glyphicon-plus'></span>".html_safe, new_trip_location_path(trip_id: @trip.id), 'data-no-turbolink' => true%>
+  <a onclick="myFunction('pin_show', 'Loca')"><span class='glyphicon glyphicon-picture'></span></a>
+  <a onclick="myFunction('Loca', 'pin_show')"><span class='glyphicon glyphicon-plus'></span></a>
   <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_trip_path %>
   <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, [@trip, @location], method: :delete, data: { confirm: 'Are you sure?' } %></div></h1>
 <% else %>
@@ -8,12 +15,27 @@
   <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe%>
   <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe %></div></h1>
 <% end %>
-
+<script type="text/javascript">
+  function myFunction(block, var1, var2) { 
+    document.getElementById(block).style.display="block"; 
+    document.getElementById(var1).style.display="none"; 
+    document.getElementById(var2).style.display="none"; 
+}
+</script>
 <div class="row" id="pin_show">
 <div class="panel panel-default">
   <div class="panel-body">
     <div id="map" style='height: 400px; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;'></div>
   </div></div>
+</div>
+<div class="row" id="Loca" style="display:none;">
+<% if current_user.id == @trip.user.id %> 
+  <div id="Locations">
+    <%= simple_fields_for :locations do |locations| %>
+      <%= render 'locations/new', :collection => @locations %>
+    <% end %>
+  </div>
+<% end %>
 </div>
 <%=javascript_include_tag "//maps.google.com/maps/api/js?key=AIzaSyDz8mE8BZQh68cH9foLPNTvlM6dMrdQMfo", :async => true, :defer => "defer"%>
 <%=javascript_include_tag "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js", :async => true, :defer => "defer"%>
@@ -48,13 +70,6 @@
       </div>
     <% end %>
 </div>
-<% if current_user.id == @trip.user.id %> 
-  <div id="Locations">
-    <%= simple_fields_for :locations do |locations| %>
-      <%= render 'locations/new', :collection => @locations %>
-    <% end %>
-  </div>
-<% end %>
 <script type="text/javascript">
   $( document ).ready(
   function() {
