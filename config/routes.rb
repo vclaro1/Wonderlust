@@ -11,10 +11,7 @@ Rails.application.routes.draw do
   resources :locations do
     resources :interests, :photos, :tips  
   end
-  resources :activities
-  resources :photos
-  resources :tips
-  resources :searches
+  resources :activities, :photos, :tips, :searches
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations'} 
   resources :users do
     member do
