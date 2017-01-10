@@ -7,9 +7,6 @@
 		document.getElementById(var1).style.display="none"; 
 		document.getElementById(var2).style.display="none"; 
 }
-	function funcion(){
-		console.log("funcionando")
-	}
 </script>
 <div class="container">
 <h1><%=@location.address%>, <%=@location.country%><div style='position: absolute; right:7%; top:12%;'>
@@ -73,7 +70,7 @@
 	<div id="columns">
 	<% @location.photos.each do |photo|%>
 		<div id="links">
-			<div class="pin" onclick="funcion()">
+			<div class="pin">
 				<a href="<%=photo.image.url(:big)%> " data-gallery><img class="big" src="<%=photo.image.url(:medium)%>"></a>	
 				<img class ="img-circle" src="<%=photo.location.trip.user.image.url(:thumb)%>">
 				<b style="position:relative; bottom:30%;left:0%;"><%=photo.location.trip.user.name%></b>

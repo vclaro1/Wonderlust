@@ -1,7 +1,8 @@
 <div class="nested-fields">
-  <div class="panel panel-default">
-  	<div class="col-md-3">
-	  <div class="panel-heading">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row">
+      <div class="panel panel-default">
+       <div class="panel-heading">
 	    <h1>Add here a new location</h1>
 	  </div>
 	  <div class="panel-body">
@@ -19,8 +20,8 @@
 		<%=f.select(:travel_mode ,options_for_select([['DRIVING', 'DRIVING'], ['TRANSIT', 'TRANSIT'], ['WALKING', 'WALKING'], ['BICYCLING', 'BICYCLING'], ['FLIGHT', 'FLIGHT']]))%>
 		  <%=f.submit%>
 		<%end%>
-	  </div>  
-      
+        </div>
+      </div>
     </div>
   </div>
 </div>
