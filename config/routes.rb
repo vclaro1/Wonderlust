@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   # get '/users/:id', :to => 'users#friends', :as => :user
   # get '/users/:id', :to => 'users#followers', :as => :user
   get :my_trips, to: 'trips#my_trips'
-
+  get :add_location, to: 'trips#add_location'
   match :find_friends, to: 'home#find_friends', as: :find_friends, via: :get
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get 'sign_in', :to => 'users/sessions#new', :as => :new_session

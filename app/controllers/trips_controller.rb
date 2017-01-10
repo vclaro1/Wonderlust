@@ -2,7 +2,8 @@ class TripsController < ApplicationController
   before_action :find_trip, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_activities, only: [:index, :show, :new, :edit]
-  
+  respond_to :html, :js
+
   def load_activities
     @activities = PublicActivity::Activity.order('created_at DESC').limit(20)
   end

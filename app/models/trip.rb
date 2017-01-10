@@ -1,5 +1,5 @@
 class Trip < ActiveRecord::Base
-	counter_culture :user
+	acts_as_followable
 	belongs_to :user
 	has_many :locations, :dependent => :destroy	
 	has_attached_file :image, styles: { medium: "300x300>" }
