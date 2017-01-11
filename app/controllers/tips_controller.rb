@@ -13,7 +13,7 @@ class TipsController < ApplicationController
     location = Location.find(params[:location_id])
   	@tip = location.tips.build(permit_tip)
   	if @tip.save
-  		flash[:succes] = "You have succesfully added your Interest!"
+  		flash[:succes] = "You have succesfully added your Tip!"
   		redirect_to location_path(@tip.location) #aqui en show debiera empezar a hacer lo de las locations
   	else
   		flash[:error] = @tip.errors.full_messages

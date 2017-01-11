@@ -1,4 +1,3 @@
 <div class="created-at">
-  <%= fa_icon 'clock-o' %>
-  <p class="user">User since <%=@user.created_at%></p>
+  <p class="user"><%= fa_icon 'clock-o' %> User since <%=@user.created_at.strftime('%B %Y')%></p>
 </div>

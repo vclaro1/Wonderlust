@@ -1,14 +1,58 @@
+<style type="text/css">
+.well #c1{
+    margin: 5px;
+    display:inline-block;
+    width: 28%;
+    left: 0%;
+    position:relative;
+    bottom: 20px;
+    height: 70px;
+} 
+.well #c2{
+    display:inline-block;
+    position: relative;
+    left: 10px;
+    width: 30%;
+    height: 70px;
+} 
+.well #c3 {
+    margin: 5px;
+    position:relative;
+    bottom: 20px;
+    left: 10%;
+    display:inline-block;
+    width: 28%;
+    height: 70px;}
+
+@media (max-width: 660px) {
+  .well #c3 {
+    left: 10px;
+    bottom: 50px;
+  }
+    .well #c1 {
+    bottom: 50px;
+  }
+}
+
+</style>
 <% if activity_resources_exist?(activity) %>
-  <div class="activity-follow">
-    <div class="follower">
-      <%= render 'shared/avatar', user: activity.owner %>
-      <h4 class="name"><%= link_to activity.owner.name, user_path(activity.owner) %></h4>
-      <span class="action">Followed </span>
-    </div>
-    <div class="followee">
-      <%= render 'shared/avatar', user: activity.trackable.followable %>
-      <h4 class="name"><%= link_to activity.trackable.followable.name, user_path(activity.trackable.followable) %></h4>
-    </div>
-    <%= render 'shared/created_at', activity: activity %>
+  <div class="well" style="border:0;height: auto;">
+      <div id="c1">
+        <img src="<%=activity.owner.image.url(:thumb)%>" class="img-circle">
+      </div>
+      <div id="c2">
+        <% if activity.owner == current_user %>
+          <span> You started following:</span>
+        <% else %>
+          <span><%= link_to activity.owner.name, user_path(activity.owner) %> Followed :</span>
+        <% end %>
+          <span><%= link_to activity.trackable.followable.name, user_path(activity.trackable.followable) %>
+          </span>
+          <%= render 'shared/created_at', activity: activity %>
+      </div>
+      <div id="c3">
+        <img src="<%=activity.trackable.followable.image.url(:thumb)%>" class="img-circle">
+      </div>
+      <button type="button" class="close" style="position:relative; left:1%;bottom:10px;">&times;</button>
   </div>
 <% end %>
