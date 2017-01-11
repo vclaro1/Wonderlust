@@ -17,9 +17,13 @@ class LocationsController < ApplicationController
     @trip = Trip.find(@location.trip_id)
     @photo = Photo.new
     @tip = Tip.new
-    @hash = Gmaps4rails.build_markers(@location) do |user, marker|
+    @json = {:lat => @location.latitude, :lng => @location.longitude }.to_json
+    @hash = Gmaps4rails.build_markers(@location.tips) do |user, marker|
+      aux = {:url  => "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png", :width =>  32, :height => 32}
       marker.lat user.latitude
       marker.lng user.longitude
+      marker.infowindow user.description
+      marker.picture  aux
     end
   end
 
@@ -50,7 +54,7 @@ class LocationsController < ApplicationController
   private
   
   	def permit_location
-  		params.require(:location).permit(:address,:country, :days, :order, :travel_mode, photos_attributes: [:id, :_destroy, :description, :date, :image], tips_attributes: [:name, :description, :date]) #ojo que hay que ver siesque order realmente sirve
+  		params.require(:location).permit(:address,:country, :days, :order, :travel_mode, photos_attributes: [:id, :_destroy, :description, :date, :image], tips_attributes: [:name, :description, :date, :longitude, :latitude]) #ojo que hay que ver siesque order realmente sirve
   	end
     
 end

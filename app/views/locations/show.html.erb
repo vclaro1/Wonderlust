@@ -2,8 +2,45 @@
 <%=javascript_include_tag "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js", :async => true, :defer => "defer"%>
 <%=javascript_include_tag '//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js', :async => true, :defer => "defer"%>
 <script type="text/javascript">
-	function myFunction(block, var1, var2) { 
-		document.getElementById(block).style.display="block"; 
+	var bool = true; 
+	var handler;
+	function updateFormLocation(latLng) {
+			  $('#latitude').val(latLng.lat());
+			  $('#longitude').val(latLng.lng());
+			}
+	function placeMarker(location, marker) {
+	        marker.setPosition(location);
+	        updateFormLocation(marker.getPosition());
+	}
+	function myFunction(block, var1, var2) {
+		document.getElementById(block).style.display="block";
+		if (block == 'Tips') {
+			handler = Gmaps.build('Google');
+			handler.buildMap({ provider: {}, internal: {id: 'mapa'}}, function(){
+			markers = handler.addMarkers(
+			    [
+			      {
+						"lat": <%=@location.latitude%> ,
+	      				"lng": <%=@location.longitude%> ,
+			      }
+			    ]
+			  ,{ draggable: true}
+			  );
+
+		  	handler.bounds.extendWith(markers);
+		  	handler.fitMapToBounds();
+		  	handler.getMap().setZoom(14);
+		  	google.maps.event.addListener(markers[0].serviceObject, 'dragend', function() {
+		    	updateFormLocation(this.getPosition());
+		  		});
+		  	google.maps.event.addListener(handler.getMap(), 'click', function (evt) {
+		        placeMarker(evt.latLng, markers[0].serviceObject);
+		    });
+			});
+
+			// Update form attributes with given coordinates
+			bool = false;
+		}
 		document.getElementById(var1).style.display="none"; 
 		document.getElementById(var2).style.display="none"; 
 }
@@ -28,9 +65,19 @@
 	<% end %>
 </div>
 <div class="row"  id="Tips" style="display:none;">
-	<%= simple_fields_for :tips do |tips| %>
-    	<%= render 'tips/new', :collection => @location.tips %>
-	<% end %>
+	<div class="panel panel-default">
+		<div class="panel-heading"><h4>Add a new Tip!</h4></div>
+		<div class="panel-body" style="width:100%;">
+			<div class="row">
+            <div class="col-md-8">
+            	<div id="mapa" style='height: 470px; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;'></div>
+            </div>
+            <div class="col-md-4"><%= simple_fields_for :tips do |tips| %>
+			    	<%= render 'tips/new', :collection => @location.tips %>
+				<% end %></div>
+        	</div> 
+		</div>
+	</div>
 </div>
 
 </div>
@@ -93,18 +140,17 @@
 	    {
 	      "lat": <%=@location.latitude%> ,
 	      "lng": <%=@location.longitude%> ,
-	      "picture": {
-	        "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-	        "width":  20,
-	        "height": 20
-	      },
 	      "infowindow": "hello!"
 	    }
 	  ]);
+	  handler1.addMarkers(<%=raw @hash.to_json%>);
 	  handler1.bounds.extendWith(markers);
 	  handler1.fitMapToBounds();
+	  handler1.getMap().setZoom(13);
 	});
 }
+
+
 		);
 
 </script>
