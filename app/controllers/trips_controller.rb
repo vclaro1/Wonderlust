@@ -33,8 +33,14 @@ class TripsController < ApplicationController
   end
 
   def add_location
-    @trip = Trip.find(params[:trip_id])
-    redirect_to @trip
+    trip = Trip.find(params[:trip_id])
+    loc = Location.find(params[:loc])
+    @new_location = Location.new(trip_id: trip.id)
+    puts @new_location.inspect
+    @new_location = loc.dup
+    @new_location.save
+    puts @new_location.inspect
+    redirect_to trip
   end
 
   def index

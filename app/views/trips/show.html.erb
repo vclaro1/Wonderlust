@@ -52,7 +52,7 @@
         </script>        
         <div class="panel-body">
           <h3>
-            <%= link_to loc.address, [loc.trip,loc] , data => no%>
+            <%= link_to loc.address, [loc.trip, loc]%>
           </h3>
           <p class="user"><%= loc.country %></p>
           interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3
@@ -63,37 +63,35 @@
             <div class="col-md-6">
               <div class="btn-group pull-right">
                 <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, [loc.trip, loc], method: :delete, data: { confirm: 'Are you sure?' } %> 
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-<%= loc.id %>">
                 Add location to my trip</button>
               </div>
-
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-<%= loc.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <h3> To which trip do you want to add this location </h3>
+            <br>
+            <% @trips.each do |trip| %>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <%= image_tag trip.image.url(:thumb) %>
+                </div>
+                <div class="panel-body">
+                  <p><%=trip.name%></p> 
+                  <%= link_to '<span class="glyphicon glyphicon-plus"></span>'.html_safe, add_location_path(:trip_id => trip.id, :loc => loc) %> 
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
     <% end %>
 </div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <h3> To which trip do you want to add this location </h3>
-      <br>
-      <div class="transitions-enabled" id="trips">
-        <% @trips.each do |trip| %>
-          <div class="box panel panel-default">
-            <div class="panel-heading">
-              <%= image_tag trip.image.url(:thumb) %>
-            </div>
-            <div class="panel-body">
-              <p><%=trip.name%></p> 
-              <%= link_to '<span class="glyphicon glyphicon-plus"></span>'.html_safe, add_location_path(:trip_id => trip.id) %> 
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+
 <script type="text/javascript">
   $( document ).ready(
   function() {
