@@ -27,8 +27,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'geocoder'
 gem 'gmaps4rails'
-# Simplifica los archivos html para q sean mas didacticos
-gem 'haml', '~> 4.0', '>= 4.0.7'
+
 gem 'test-unit'
 
 #Para darle estilo a la pagina
@@ -61,10 +60,7 @@ gem 'will_paginate', '~> 3.1', '>= 3.1.5'
 #Gem para separar entre viajes publicos y privados
 gem 'public_activity', '~> 1.5'
 
-gem 'carrierwave'
-gem 'friendly_id', '~> 5.0'
 
-gem 'counter_culture', '~> 0.1.33'
 
 gem 'faker'
 gem 'populator'

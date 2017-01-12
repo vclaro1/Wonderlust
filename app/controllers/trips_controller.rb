@@ -30,11 +30,10 @@ class TripsController < ApplicationController
     end
   end
 
-  def upvote
-    @trip.upvote_by current_user
-    redirect_to :back
+  def add_location
+    @trip = Trip.find(params[:trip_id])
+    redirect_to @trip
   end
-
 
   def index
     @user = current_user
@@ -44,8 +43,10 @@ class TripsController < ApplicationController
   end
 
   def show
+    @user = current_user
   	@locations = @trip.locations
     @location = Location.new
+    @trips = @user.trips
   end
 
   def create

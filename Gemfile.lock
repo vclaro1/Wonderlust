@@ -42,9 +42,6 @@ GEM
       tzinfo (~> 1.1)
     acts_as_follower (0.2.1)
     acts_as_votable (0.10.0)
-    after_commit_action (1.0.1)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
     arel (6.0.3)
     auto_html (1.6.4)
       redcarpet (~> 3.1)
@@ -59,10 +56,6 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.2)
     byebug (9.0.6)
-    carrierwave (1.0.0)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      mime-types (>= 1.16)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -76,10 +69,6 @@ GEM
     coffee-script-source (1.12.2)
     commonjs (0.2.7)
     concurrent-ruby (1.0.3)
-    counter_culture (0.1.34)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      after_commit_action (~> 1.0.0)
     crass (1.0.2)
     debug_inspector (0.0.2)
     devise (3.5.10)
@@ -100,14 +89,10 @@ GEM
       multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.7.0.1)
       railties (>= 3.2, < 5.1)
-    friendly_id (5.2.0)
-      activerecord (>= 4.0.0)
     geocoder (1.4.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     gmaps4rails (2.1.2)
-    haml (4.0.7)
-      tilt
     hashie (3.4.6)
     i18n (0.7.0)
     jbuilder (2.6.1)
@@ -283,17 +268,13 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.3.6)
   byebug
-  carrierwave
   coffee-rails (~> 4.1.0)
-  counter_culture (~> 0.1.33)
   devise
   devise_security_extension
   faker
   font-awesome-rails
-  friendly_id (~> 5.0)
   geocoder
   gmaps4rails
-  haml (~> 4.0, >= 4.0.7)
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails (~> 4.2.1)

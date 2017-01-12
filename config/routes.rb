@@ -2,9 +2,6 @@ Rails.application.routes.draw do
 
   resources :search_suggestions
   resources :trips do
-    member do
-      put 'like', to: "trips#upvote"
-    end
     resources :locations      
   end
   
@@ -31,6 +28,8 @@ Rails.application.routes.draw do
   get :add_location, to: 'trips#add_location'
   match :find_friends, to: 'home#find_friends', as: :find_friends, via: :get
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
+  match :like, to: 'likes#create', as: :like, via: :post
+  match :unlike, to: 'likes#destroy', as: :unlike, via: :post
   get 'sign_in', :to => 'users/sessions#new', :as => :new_session
   resources :users, only: [:index]
   # The priority is based upon order of creation: first created -> highest priority.
