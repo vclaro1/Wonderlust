@@ -52,7 +52,7 @@
         </script>        
         <div class="panel-body">
           <h3>
-            <%= link_to loc.address, [loc.trip,loc] %>
+            <%= link_to loc.address, [loc.trip,loc] , data => no%>
           </h3>
           <p class="user"><%= loc.country %></p>
           interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3
@@ -112,20 +112,8 @@
           renderDirections(result);
         });
       }
-    locs.forEach(function(element) {
-        markers = handler.addMarkers([
-              {
-                "lat": element[0],
-                "lng": element[1],
-                "picture": {
-                  "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-                  "width":  32,
-                  "height": 32
-                },
-                "infowindow": "hello!"
-              }
-            ]); 
-    });
+      
+    markers = handler.addMarkers(<%=raw @hash.to_json%>); 
     for (i = 0; i <= locs.length - 2; i++) {
       var color;
       var r = Math.floor(Math.random() * 255);
@@ -164,6 +152,7 @@
       }
           }
     handler.fitMapToBounds();
+    handler.resetBounds();
   });
   }
     );

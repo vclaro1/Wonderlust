@@ -7,6 +7,7 @@ class TripsController < ApplicationController
   def load_activities
     @activities = PublicActivity::Activity.order('created_at DESC').limit(20)
   end
+  
   def new
   	@trip = Trip.new
     @location = @trip.locations.build
@@ -14,6 +15,7 @@ class TripsController < ApplicationController
 
   def edit 
   end
+
   def my_trips
     @user = current_user
     if @user
@@ -47,6 +49,10 @@ class TripsController < ApplicationController
   	@locations = @trip.locations
     @location = Location.new
     @trips = @user.trips
+    @hash = Gmaps4rails.build_markers(@locations) do |user, marker|
+      marker.lat user.latitude
+      marker.lng user.longitude
+    end
   end
 
   def create

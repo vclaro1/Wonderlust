@@ -1,19 +1,8 @@
-<div class="nested-fields">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="row">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h1>Fill the description of your interest</h1>
-        </div>
-        <div class="panel-body">
-          <%= simple_form_for [@location, @tip] do |f| %>
-            <%= f.input :date, as: :datetime%>
-            <%= f.input :name, placeholder: "Interest here" %>
-            <%= f.input :description, size: 200 %>
-            <%= f.button :submit, "Submit Tip" , class: "btn btn-primary" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= simple_form_for [@location, @tip] do |f| %>
+  <%= f.input :date, as: :datetime%>
+  <%= f.input :name, placeholder: "Interest here" %>
+  <%= f.input :description, size: 200 %>
+  <%= f.hidden_field :latitude, id: "latitude" %>
+  <%= f.hidden_field :longitude, id: "longitude" %>
+  <%= f.button :submit, "Submit Tip" , class: "btn btn-primary" %>
+<% end %>
