@@ -12,18 +12,32 @@ class LocationsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @location = Location.find(params[:id])
     @others = Location.where(:latitude => @location.latitude, :longitude => @location.longitude)
-    @trip = Trip.find(@location.trip_id)
+    @trips = @user.trips
     @photo = Photo.new
     @tip = Tip.new
     @json = {:lat => @location.latitude, :lng => @location.longitude }.to_json
     @hash = Gmaps4rails.build_markers(@location.tips) do |tip, marker| 
       marker.lat tip.latitude
       marker.lng tip.longitude
-      marker.infowindow render_to_string(:partial => "/tips/infowindow", :locals => {:tip => tip, :user => current_user}) #:locals son las variables a usar en el partial, en el partial usar sender. 
+      marker.infowindow render_to_string(:partial => "/tips/infowindow", :locals => {:tip => tip, :user => current_user, :trip => @trip}) #:locals son las variables a usar en el partial, en el partial usar sender. 
       marker.picture({:url  => "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png", :width =>  32, :height => 32})
     end
+  end
+
+  def add_tip
+    trip = Trip.find(params[:trip_id])
+    tip = Tip.find(params[:tip])
+    loc = tip.location
+    @new_tip = Tip.new
+    @new_tip = tip.dup
+    puts @new_tip.inspect
+    #Por si te sirve esta funcion de abajo te muestra todos los atributos de la variable new_location para ver si lo estay pasando bien.
+    #La use caleta
+
+    redirect_to loc
   end
 
   def create

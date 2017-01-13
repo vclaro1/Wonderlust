@@ -1,4 +1,32 @@
-<h4><%=tip.name%></h4>
-<p><%=tip.description%></p>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4><%=tip.name%></h4>
+	</div>
+	<div class="panel-body">
+		<p><%=tip.description%></p>
+	</div>
+	<div class="btn-group pull-right">
+		<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-<%= tip.id %>">
+	    Add tip to my trip</button>
+	</div>
+</div>
 
-
+<div class="modal" id="modal-<%= tip.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+	        <h3> To which trip do you want to add this location </h3>
+	        <br>
+	        <% @trips.each do |trip| %>
+	          <div class="panel panel-default">
+	            <div class="panel-heading">
+	              <%= image_tag trip.image.url(:thumb) %>
+	            </div>
+	            <div class="panel-body">
+	              <p><%=trip.name%></p> 
+	              <%= link_to '<span class="glyphicon glyphicon-plus"></span>'.html_safe, add_tip_path(:trip_id => trip.id, :tip => tip) %> 
+	            </div>
+	          </div>
+	        <% end %>
+    	</div>
+    </div>
+</div>
