@@ -6,7 +6,7 @@
 		<p><%=tip.description%></p>
 	</div>
 	<div class="btn-group pull-right">
-		<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-<%= tip.id %>">
+		<button type="button" onclick="fak(this);" class="open-AddBookDialog btn btn-primary btn-sm" data-toggle="modal" data-target="#modal" data-id="<%=tip.id%>">
 	    Add tip to my trip</button>
 	</div>
 </div>
