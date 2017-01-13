@@ -28,31 +28,34 @@ class LocationsController < ApplicationController
   end
 
   def add_tip
-    @trip = Trip.find(params[:trip_id])
+    trip = Trip.find(params[:trip_id])
     tip = Tip.find(params[:tip])
-    long = tip.location.find(params[:longitude])
-    lati = tip.location.find(params[:latitude])
+    long = tip.location.longitude
+    puts long.inspect
+    lat = tip.location.latitude
     @new_tip = Tip.new
     @new_tip = tip.dup
     puts @new_tip.inspect
-    if @trip.locations.any?{|location| location.longitude = long && location.latitude = lat}
-      @trip.location.where(longitude: long).find_each do |loc|
+    if trip.locations.any?{|location| location.longitude = long && location.latitude = lat}
+      trip.locations.where(longitude: long).find_each do |loc|
         @new_tip.location_id = loc.id
       end
+      puts 'OENSONOSNOSNOKSNOKSOSMOKSDMOSKMOKMAOKDMOSKMAOKMDSOAKDMASODMOSKmaokmOKSM'
       puts @new_tip.inspect 
       @new_tip.save
       flash[:success] = "You have succesfully added this tip to your trip"
       redirect_to :back
     else 
-      @location = Location.new
-      @location = tip.location.dup
-      @location.trip_id = @trip.id
-      @location.save
-      @new_tip.location_id = @location.id
+      @new_location = Location.new
+      @new_location = tip.location.dup
+      @new_location.trip_id = trip.id
+      puts @new_location.inspect
+      @new_location.save
+      @new_tip.location_id = @new_location.id
       puts @new_tip.inspect
       @new_tip.save
       flash[:success] = "You have succesfully added this tip to your trip"
-      redirect_to :back
+      redirect_to @new_location
     end
     #Por si te sirve esta funcion de abajo te muestra todos los atributos de la variable new_location para ver si lo estay pasando bien.
     #La use caleta

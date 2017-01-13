@@ -62,25 +62,6 @@
 <a id="photo_upload" onclick="myFunction('Photos', 'Tips', 'pin_show')"><span class='glyphicon glyphicon-camera'></span></a>
 <a id="tip_upload" onclick="myFunction('Tips', 'Photos', 'pin_show')"><span class='glyphicon glyphicon-map-marker'></span></a>
 <%=link_to "<span class='glyphicon glyphicon-arrow-left'></span>".html_safe, @trip%></div></h1>
-<div class="modal" id="modal-<%= tip.id %>" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-	        <h3> To which trip do you want to add this location </h3>
-	        <br>
-	        <% @trips.each do |trip| %>
-	          <div class="panel panel-default">
-	            <div class="panel-heading">
-	              <%= image_tag trip.image.url(:thumb) %>
-	            </div>
-	            <div class="panel-body">
-	              <p><%=trip.name%></p> 
-	              <%= link_to '<span class="glyphicon glyphicon-plus"></span>'.html_safe, add_tip_path(:trip_id => trip.id, :tip => tip) %> 
-	            </div>
-	          </div>
-	        <% end %>
-    	</div>
-    </div>
-</div>
 <div class="row" id="pin_show">
 <div class="panel panel-default">
   <div class="panel-body">
