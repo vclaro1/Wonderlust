@@ -28,16 +28,35 @@ class LocationsController < ApplicationController
   end
 
   def add_tip
-    trip = Trip.find(params[:trip_id])
+    @trip = Trip.find(params[:trip_id])
     tip = Tip.find(params[:tip])
-    loc = tip.location
+    long = tip.location.find(params[:longitude])
+    lati = tip.location.find(params[:latitude])
     @new_tip = Tip.new
     @new_tip = tip.dup
     puts @new_tip.inspect
+    if @trip.locations.any?{|location| location.longitude = long && location.latitude = lat}
+      @trip.location.where(longitude: long && latitude: lat).find_each do |loc|
+        @new_tip.location_id = loc.id
+      end
+      puts @new_tip.inspect 
+      @new_tip.save
+      flash[:success] = "You have succesfully added this tip to your trip"
+      redirect_to :back
+    else 
+      @location = Location.new
+      @location = tip.location.dup
+      @location.trip_id = @trip.id
+      @location.save
+      @new_tip.location_id = @location.id
+      puts @new_tip.inspect
+      @new_tip.save
+      flash[:success] = "You have succesfully added this tip to your trip"
+      redirect_to :back
+    end
     #Por si te sirve esta funcion de abajo te muestra todos los atributos de la variable new_location para ver si lo estay pasando bien.
     #La use caleta
 
-    redirect_to loc
   end
 
   def create
