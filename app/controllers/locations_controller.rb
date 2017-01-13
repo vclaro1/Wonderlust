@@ -36,7 +36,7 @@ class LocationsController < ApplicationController
     @new_tip = tip.dup
     puts @new_tip.inspect
     if @trip.locations.any?{|location| location.longitude = long && location.latitude = lat}
-      @trip.location.where(longitude: long && latitude: lat).find_each do |loc|
+      @trip.location.where(longitude: long).find_each do |loc|
         @new_tip.location_id = loc.id
       end
       puts @new_tip.inspect 
