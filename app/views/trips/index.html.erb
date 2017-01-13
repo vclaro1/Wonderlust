@@ -3,10 +3,10 @@
     <% @trips.each do |trip| %>
       <div class="box panel panel-default">
         <div class="col-md-3"> </div>
-          <%= link_to (image_tag trip.image.url(:medium)), trip %>
+          <%= link_to (image_tag trip.image.url(:medium)), trip , 'data-no-turbolink' => true%>
         <div class="panel-body">
           <h3>
-            <%= link_to trip.name, trip %>
+            <%= link_to trip.name, trip , 'data-no-turbolink' => true%>
           </h3>
           <p class="user"></p>
           Submitted by

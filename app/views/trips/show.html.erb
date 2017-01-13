@@ -15,13 +15,6 @@
   <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe%>
   <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe %></div></h1>
 <% end %>
-<script type="text/javascript">
-  function myFunction(block, var1, var2) { 
-    document.getElementById(block).style.display="block"; 
-    document.getElementById(var1).style.display="none"; 
-    document.getElementById(var2).style.display="none"; 
-}
-</script>
 <div class="row" id="pin_show">
 <div class="panel panel-default">
   <div class="panel-body">
@@ -52,7 +45,7 @@
         </script>        
         <div class="panel-body">
           <h3>
-            <%= link_to loc.address, [loc.trip, loc]%>
+            <%= link_to loc.address, [loc.trip,loc] , 'data-no-turbolink' => true %>
           </h3>
           <p class="user"><%= loc.country %></p>
           interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3
