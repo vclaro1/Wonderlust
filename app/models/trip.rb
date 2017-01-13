@@ -1,8 +1,9 @@
 class Trip < ActiveRecord::Base
-	counter_culture :user
+	include Shared::Callbacks
+	acts_as_followable
 	belongs_to :user
 	has_many :locations, :dependent => :destroy	
-	has_attached_file :image, styles: { medium: "300x300>" }
+	has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }
 	validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 	acts_as_votable
 	accepts_nested_attributes_for :locations, allow_destroy: true, reject_if: :all_blank

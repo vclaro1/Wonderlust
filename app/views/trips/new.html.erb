@@ -1,0 +1,28 @@
+<div class="col-md-6 col-md-offset-3">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1>Welcome to your new trip</h1>
+      </div>
+      <div class="panel-body">
+        <%= simple_form_for @trip do |f| %>
+          <%= f.input :name %>
+          <%= f.input :date_start, as: :date %>
+          <%= f.input :date_end, as: :date %>
+          <%= f.input :rating, collection: 1..10 %>
+          <%= f.input :budget, collection: 1..100 %>
+          <br/>
+          <strong>Current Image</strong>
+          <% if @trip.image.present? %>
+            <%= image_tag @trip.image.url(:medium) %>
+          <% else %>
+            <%= f.input :image %>
+          <% end %>
+          <br/>
+          <%= f.button :submit, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

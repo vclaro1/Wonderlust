@@ -18,7 +18,7 @@
             <div class="col-md-6">Presupuesto de <%=trip.budget%> USD por dia</div>
             <div class="col-md-6">
               <div class="btn-group pull-right">
-                <%= link_to like_trip_path(trip), method: :put, class: "btn btn-default" do  %>
+                <%= link_to like_path(trip), method: :put, class: "btn btn-default" do  %>
                   <span class="glyphicon glyphicon-heart">
                     <%= trip.get_upvotes.size %>
                   </span>

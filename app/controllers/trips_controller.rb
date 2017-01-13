@@ -2,7 +2,8 @@ class TripsController < ApplicationController
   before_action :find_trip, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_activities, only: [:index, :show, :new, :edit]
-  
+  respond_to :html, :js
+
   def load_activities
     @activities = PublicActivity::Activity.order('created_at DESC').limit(20)
   end
@@ -31,11 +32,18 @@ class TripsController < ApplicationController
     end
   end
 
-  def upvote
-    @trip.upvote_by current_user
-    redirect_to :back
+  def add_location
+    trip = Trip.find(params[:trip_id])
+    loc = Location.find(params[:loc])
+    @new_location = Location.new
+    @new_location = loc.dup
+    @new_location.trip_id = trip.id
+    @new_location.save
+    #Por si te sirve esta funcion de abajo te muestra todos los atributos de la variable new_location para ver si lo estay pasando bien.
+    #La use caleta
+    puts @new_location.inspect
+    redirect_to trip
   end
-
 
   def index
     @user = current_user
@@ -45,8 +53,10 @@ class TripsController < ApplicationController
   end
 
   def show
+    @user = current_user
   	@locations = @trip.locations
     @location = Location.new
+    @trips = @user.trips
     @hash = Gmaps4rails.build_markers(@locations) do |user, marker|
       marker.lat user.latitude
       marker.lng user.longitude

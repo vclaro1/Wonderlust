@@ -4,7 +4,6 @@
       <div class="box panel panel-default">
         <div class="col-md-3"> </div>
           <%= link_to (image_tag trip.image.url(:medium)), trip , 'data-no-turbolink' => true%>
-
         <div class="panel-body">
           <h3>
             <%= link_to trip.name, trip , 'data-no-turbolink' => true%>
@@ -14,18 +13,10 @@
           <%= trip.user.name %>
         </div>
         <div class="panel-footer">
-          <div class="row">
+          <div id="<%= trip.id %>" class="row">
             <div class="col-md-6">Presupuesto de <%=trip.budget%> USD por dia</div>
-            <div class="col-md-6">
-              <div class="btn-group pull-right">
-                <%= link_to like_trip_path(trip), method: :put, class: "btn btn-default" do  %>
-                  <span class="glyphicon glyphicon-heart">
-                    <%= trip.get_upvotes.size %>
-                  </span>
-                <% end %>
-              </div>
-            </div>
-          </div>
+            <%= render 'shared/actions', resource: trip %>
+          </div>            
         </div>
       </div>
     <% end %>
