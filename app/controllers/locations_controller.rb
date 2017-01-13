@@ -18,12 +18,11 @@ class LocationsController < ApplicationController
     @photo = Photo.new
     @tip = Tip.new
     @json = {:lat => @location.latitude, :lng => @location.longitude }.to_json
-    @hash = Gmaps4rails.build_markers(@location.tips) do |user, marker|
-      aux = {:url  => "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png", :width =>  32, :height => 32}
-      marker.lat user.latitude
-      marker.lng user.longitude
-      marker.infowindow user.description
-      marker.picture  aux
+    @hash = Gmaps4rails.build_markers(@location.tips) do |tip, marker| 
+      marker.lat tip.latitude
+      marker.lng tip.longitude
+      marker.infowindow render_to_string(:partial => "/tips/infowindow", :locals => {:tip => tip, :user => current_user}) #:locals son las variables a usar en el partial, en el partial usar sender. 
+      marker.picture({:url  => "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png", :width =>  32, :height => 32})
     end
   end
 
