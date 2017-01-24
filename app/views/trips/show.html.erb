@@ -48,7 +48,11 @@
             <%= link_to loc.address, [loc.trip,loc] , 'data-no-turbolink' => true %>
           </h3>
           <p class="user"><%= loc.country %></p>
-          interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3, interes 1, interes 2, interes 3
+          <% if loc.tips.any? %>
+            <p><%= loc.tips.collect { |a| a.name } %></p>
+          <% else %>
+            <p>There are no interests here</p>
+          <% end %>
         </div>
         <div class="panel-footer">
           <div class="row">
