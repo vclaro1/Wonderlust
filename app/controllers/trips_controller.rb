@@ -35,9 +35,11 @@ class TripsController < ApplicationController
   def add_location
     trip = Trip.find(params[:trip_id])
     loc = Location.find(params[:loc])
+    tips = loc.tips 
     @new_location = Location.new
     @new_location = loc.dup
     @new_location.trip_id = trip.id
+    @new_location.tips = tips
     @new_location.save
     #Por si te sirve esta funcion de abajo te muestra todos los atributos de la variable new_location para ver si lo estay pasando bien.
     #La use caleta

@@ -9,13 +9,14 @@ Rails.application.routes.draw do
     resources :interests, :photos, :tips  
   end
   resources :activities, :photos, :tips, :searches
-  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations'} 
+  devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations', confirmations: 'confirmations'}
   resources :users do
     member do
       get :friends
       get :followers
       get :deactivate
       get :mentionable
+      get :confirmation
     end
   end
   match :follow, to: 'follows#create', as: :follow, via: :post
