@@ -9,26 +9,34 @@
   <a onclick="myFunction('pin_show', 'Loca')"><span class='glyphicon glyphicon-picture'></span></a>
   <a onclick="myFunction('Loca', 'pin_show')"><span class='glyphicon glyphicon-plus'></span></a>
   <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_trip_path %>
-  <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, [@trip, @location], method: :delete, data: { confirm: 'Are you sure?' } %></div></h1>
+  <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, @trip, method: :delete, data: { confirm: 'Are you sure?' } %></div></h1>
 <% else %>
   <%= link_to "<span class='glyphicon glyphicon-plus'></span>".html_safe%>
   <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe%>
   <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe %></div></h1>
 <% end %>
-<div class="row" id="pin_show">
-<div class="panel panel-default">
-  <div class="panel-body">
-    <div id="map" style='height: 400px; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;'></div>
-  </div></div>
-</div>
-<div class="row" id="Loca" style="display:none;">
-<% if current_user.id == @trip.user.id %> 
-  <div id="Locations">
-    <%= simple_fields_for :locations do |locations| %>
-      <%= render 'locations/new', :collection => @locations %>
-    <% end %>
+<div class="container">
+  <div class="col-md-4">
+    <h4><%= @trip.description %></h4>
+    <h5>Average budget during trip <%= @trip.budget %> in USD</h5>
+    <%= render 'shared/actions', resource: @trip %>
   </div>
-<% end %>
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div id="map" style='height: 400px; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;'></div>
+      </div>
+    </div>
+    <div class="row" id="Loca" style="display:none;">
+      <% if current_user.id == @trip.user.id %> 
+        <div id="Locations">
+          <%= simple_fields_for :locations do |locations| %>
+            <%= render 'locations/new', :collection => @locations %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 <%=javascript_include_tag "//maps.google.com/maps/api/js?key=AIzaSyDz8mE8BZQh68cH9foLPNTvlM6dMrdQMfo", :async => true, :defer => "defer"%>
 <%=javascript_include_tag "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js", :async => true, :defer => "defer"%>
@@ -36,59 +44,60 @@
 <script type="text/javascript">
   var locs = [];
 </script>
-<div class="transitions-enabled" id="trips">
-    <% @locations.each do |loc| %>
-      <div class="box panel panel-default">
-        <div class="col-md-3"> </div>
-        <script type="text/javascript">
-          locs.push([<%=loc.latitude%>, <%=loc.longitude%>, String("<%=loc.travel_mode%>")]) 
-        </script>        
-        <div class="panel-body">
-          <h3>
-            <%= link_to loc.address, [loc.trip,loc] , 'data-no-turbolink' => true %>
-          </h3>
-          <p class="user"><%= loc.country %></p>
-          <% if loc.tips.any? %>
-            <p><%= loc.tips.collect { |a| a.name } %></p>
-          <% else %>
-            <p>There are no interests here</p>
-          <% end %>
-        </div>
-        <div class="panel-footer">
-          <div class="row">
-            <div class="col-md-6"> <%=loc.days%> Days</div>
-            <div class="col-md-6">
-              <div class="btn-group pull-right">
-                <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, [loc.trip, loc], method: :delete, data: { confirm: 'Are you sure?' } %> 
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-<%= loc.id %>">
-                Add location to my trip</button>
+<div class="container">
+  <div class="transitions-enabled" id="trips">
+      <% @locations.each do |loc| %>
+        <div class="box panel panel-default">
+          <div class="col-md-3"> </div>
+          <script type="text/javascript">
+            locs.push([<%=loc.latitude%>, <%=loc.longitude%>, String("<%=loc.travel_mode%>")]) 
+          </script>        
+          <div class="panel-body">
+            <h3>
+              <%= link_to loc.address, [loc.trip,loc] , 'data-no-turbolink' => true %>
+            </h3>
+            <p class="user"><%= loc.country %></p>
+            <% if loc.tips.any? %>
+              <p><%= loc.tips.collect { |a| a.name } %></p>
+            <% else %>
+              <p>There are no interests here</p>
+            <% end %>
+          </div>
+          <div class="panel-footer">
+            <div class="row">
+              <div class="col-md-6"> <%=loc.days%> Days</div>
+              <div class="col-md-6">
+                <div class="btn-group pull-right">
+                  <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, [loc.trip, loc], method: :delete, data: { confirm: 'Are you sure?' } %> 
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-<%= loc.id %>">
+                  Add location to my trip</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal fade" id="modal-<%= loc.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <h3> To which trip do you want to add this location </h3>
-            <br>
-            <% @trips.each do |trip| %>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <%= image_tag trip.image.url(:thumb) %>
+        <div class="modal fade" id="modal-<%= loc.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <h3> To which trip do you want to add this location </h3>
+              <br>
+              <% @trips.each do |trip| %>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <%= image_tag trip.image.url(:thumb) %>
+                  </div>
+                  <div class="panel-body">
+                    <p><%=trip.name%></p> 
+                    <%= link_to '<span class="glyphicon glyphicon-plus"></span>'.html_safe, add_location_path(:trip_id => trip.id, :loc => loc) %> 
+                  </div>
                 </div>
-                <div class="panel-body">
-                  <p><%=trip.name%></p> 
-                  <%= link_to '<span class="glyphicon glyphicon-plus"></span>'.html_safe, add_location_path(:trip_id => trip.id, :loc => loc) %> 
-                </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+  </div>
 </div>
-
 <script type="text/javascript">
   $( document ).ready(
   function() {

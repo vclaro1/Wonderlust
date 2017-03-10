@@ -11,6 +11,7 @@
           <%= f.input :date_end, as: :date %>
           <%= f.input :rating, collection: 1..10 %>
           <%= f.input :budget, collection: 1..100 %>
+          <%= f.input :description, size: 300 %>
           <br/>
           <strong>Current Image</strong>
           <% if @trip.image.present? %>
