@@ -2,6 +2,7 @@ class SearchesController < ApplicationController
   
 	def new
 		@search = Search.new
+		@interests = Tip.uniq.pluck(:name)
 	end
 
 	def create
@@ -11,7 +12,7 @@ class SearchesController < ApplicationController
 
 	def show
 		@search = Search.find(params[:id])
-		if @search.search_locations_address.nil? and @search.search_locations_country.nil?
+		if @search.search_locations.nil?
 			string = "Location"
 			if @search.tipo != "loc" 
 				string = "Trip"	

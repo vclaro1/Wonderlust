@@ -1,24 +1,19 @@
 <script type="text/javascript">
-  var type = 'loc';
-  $('#type').val(type);
-  function doSomething() {
-    $('#type').val("loc");
-}
-  function doSomething1() {
-    $('#type').val("trep");
+  $('#type').val('loc');
+  var interests = "";
+  function doSomething(value) {
+    $('#type').val(value);
 }
 </script>
-<h1>Search#new</h1>
-<p>Find me in app/views/search/new.html.erb</p>
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
   <div id="but1"  class="btn-group" role="group">
-    <button type="button" onclick="doSomething()" class="btn btn-default ">Location</button>
+    <button type="button" onclick="doSomething('loc')" class="btn btn-default ">Location</button>
   </div>
   <div id="but2" class="btn-group" role="group">
-    <button type="button" onclick="doSomething1()" class="btn btn-default">Trip</button>
+    <button type="button" onclick="doSomething('trep')" class="btn btn-default">Trip</button>
   </div>
 </div>
-<%= form_for @search, html: {class: "pure_form"} do |f| %>
+<%= form_for @search, html: {clss: "pure_form"} do |f| %>
         <div class="field" style="text-align:left">
           <%= f.label :name %><br>
           <%= f.text_field :name , class: "form-control"%>
@@ -33,7 +28,8 @@
         <div class="field" style="text-align:left">
           <br>
           <%= f.label :interests %><br>
-          <%= f.text_field :interests , class: "form-control"%>
+          <input class="form-control" id="magicsuggest">
+          <%= f.hidden_field :interests, id: "interests" %>
           <%= f.hidden_field :tipo, id: "type" %>
         </div>
         <div>
@@ -43,3 +39,17 @@
           <%= f.submit "Search" , class: "btn btn-large btn-primary btn-block"%>
         </div>
       <% end %>
+<script type="text/javascript">
+ var ms =  $('#magicsuggest').magicSuggest({
+        placeholder: 'Type your interests here',
+        data: <%=raw(@interests)%>
+    });
+$(ms).on('selectionchange', function(){
+  str = JSON.stringify(this.getSelection(), ["name"]).replace(/[,:{}]/g, "").replace("[", "").replace("]", "").split('"');
+  aux = "";
+  for (var i = 0; i <= Math.floor(str.length/4) - 1; i++) {
+    aux = aux +str[i*4 + 3] + ",";
+  }
+  $('#interests').val(aux);
+});
+</script>

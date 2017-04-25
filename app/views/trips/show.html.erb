@@ -90,8 +90,7 @@
 </div>
 
 <script type="text/javascript">
-  $( document ).ready(
-  function() {
+  function deploymap() {
   handler = Gmaps.build('Google');
   var directions = [];
   function renderDirections(result) {
@@ -107,8 +106,9 @@
           renderDirections(result);
         });
       }
-      
-    markers = handler.addMarkers(<%=raw @hash.to_json%>); 
+    console.log(<%=raw @hash.to_json%>)  
+    markers = handler.addMarkers(<%=raw @hash.to_json%>);
+    handler.bounds.extendWith(markers);
     for (i = 0; i <= locs.length - 2; i++) {
       var color;
       var r = Math.floor(Math.random() * 255);
@@ -147,8 +147,19 @@
       }
           }
     handler.fitMapToBounds();
-    handler.resetBounds();
   });
   }
+  $( document ).ready(
+    function (){
+        try {
+              deploymap();
+            }
+        catch(err) {
+              console.log("pelaaoooo")
+            }
+        finally {
+              deploymap();
+            }
+              }
     );
 </script>
