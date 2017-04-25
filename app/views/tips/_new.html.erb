@@ -1,8 +1,24 @@
 <%= simple_form_for [@location, @tip] do |f| %>
   <%= f.input :date, as: :datetime%>
-  <%= f.input :name, placeholder: "Interest here" %>
+  <input class="form-control" id="magicsuggest">
+  <%= f.hidden_field :name, id: "interests"%>
   <%= f.input :description, size: 200 %>
   <%= f.hidden_field :latitude, id: "latitude" %>
   <%= f.hidden_field :longitude, id: "longitude" %>
   <%= f.button :submit, "Submit Tip" , class: "btn btn-primary" %>
 <% end %>
+<script type="text/javascript">
+	var ms =  $('#magicsuggest').magicSuggest({
+        placeholder: 'Type your interests here',
+        data: <%=raw(@interests)%>,
+        maxSelection: 1
+    });
+	$(ms).on('selectionchange', function(){
+	  str = JSON.stringify(this.getSelection(), ["name"]).replace(/[,:{}]/g, "").replace("[", "").replace("]", "").split('"');
+	  aux = "";
+	  for (var i = 0; i <= Math.floor(str.length/4) - 1; i++) {
+	    aux = aux + str[i*4 + 3] + ",";
+	  }
+	  $('#interests').val(aux);
+	});
+</script>

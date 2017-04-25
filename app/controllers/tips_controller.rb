@@ -2,6 +2,7 @@ class TipsController < ApplicationController
   def new
   	@tip = Tip.new
     @location = Location.find(params[:location_id])
+    @interests = Tip.uniq.pluck(:name)
   end
 
   def show

@@ -15,6 +15,7 @@ class LocationsController < ApplicationController
     @user = current_user
     @location = Location.find(params[:id])
     @others = Location.where(:latitude => @location.latitude, :longitude => @location.longitude)
+    @interests = Tip.uniq.pluck(:name)
     @trips = @user.trips
     @photo = Photo.new
     @tip = Tip.new
@@ -40,8 +41,6 @@ class LocationsController < ApplicationController
       trip.locations.where(longitude: long).find_each do |loc|
         @new_tip.location_id = loc.id
       end
-      puts 'OENSONOSNOSNOKSNOKSOSMOKSDMOSKMOKMAOKDMOSKMAOKMDSOAKDMASODMOSKmaokmOKSM'
-      puts @new_tip.inspect 
       @new_tip.save
       flash[:success] = "You have succesfully added this tip to your trip"
       redirect_to :back

@@ -1,32 +1,28 @@
 class Search < ActiveRecord::Base
 
-	def search_locations_address
-		contry = Location.where(["address LIKE ?", "%#{name}%"]) if name.present?
-		if not contry.nil? and interests.present?
-			contry = contry.to_a
-			clone = contry.clone
-			contry.each do |locs|
-					if not locs.interests.where(["name LIKE ?", "%#{interests}%"]).any? 
-						clone.delete(locs)	
-					end
-			end
-			contry = clone	
+	def search_locations
+		contry = nil
+		if name != "" and continent != ""
+			contry = Location.where({address: name, country: continent}) 
+		elsif name != ""
+			contry = Location.where({address: name}) 
+		elsif continent != ""
+			contry = Location.where({country: continent}) 	
+		end
+		if not contry.nil? and interests != ""
+			contry = search_interest(contry)
 		end
 		return contry
 	end
 
-	def search_locations_country
-		contry = Location.where(["country LIKE ?", "%#{continent}%"]) if continent.present?
-		if not contry.nil? and interests.present?
-			contry = contry.to_a
-			clone = contry.clone
-			contry.each do |locs|
-					if not locs.interests.where(["name LIKE ?", "%#{interests}%"]).any? 
-						clone.delete(locs)	
-					end
-			end
-			contry = clone	
+	def search_interest(contry)
+		clone = contry.to_a.clone
+		arr = interests.split(",")
+		contry.each do |locs|
+				if not locs.tips.where({name: arr}).any?
+					clone.delete(locs)
+				end
 		end
-		return contry
+		return clone
 	end
 end

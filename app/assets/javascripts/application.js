@@ -13,12 +13,12 @@
 //= require jquery
 //= require masonry/jquery.masonry
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require jquery.ui.autocomplete
 //= require gmaps/google
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require underscore
+//= require magicsuggest
 //= require blueimp-gallery
 //= require blueimp-gallery-fullscreen
 //= require blueimp-gallery-indicator
