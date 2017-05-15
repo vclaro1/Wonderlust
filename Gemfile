@@ -30,7 +30,7 @@ gem 'test-unit'
 
 #Para darle estilo a la pagina
 gem 'simple_form', '~> 3.3', '>= 3.3.1'
-gem 'mysql2'
+gem 'pg'
 gem 'acts_as_votable', '~> 0.10.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
