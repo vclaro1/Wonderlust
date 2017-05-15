@@ -83,3 +83,4 @@ test:
 production:
   <<: *default
   database: wanderlust_production
+  password: <%= ENV['WONDERLUST_DATABASE_PASSWORD'] %>
