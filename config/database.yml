@@ -8,14 +8,12 @@ default: &default
   adapter: postgresql
   encoding: unicode
   database: wanderlust
-  host: localhost
 
 
 development:
   adapter: postgresql
   encoding: unicode
-  database: wanderlust_test
-  host: localhost
+  database: wanderlust
 
 
 # Warning: The database defined as "test" will be erased and
@@ -24,13 +22,10 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: db_name
-  host: localhost
+  database: wanderlust_test
 
 
 production:
   adapter: postgresql
   encoding: unicode
   database: wanderlust
-  host: localhost
-
