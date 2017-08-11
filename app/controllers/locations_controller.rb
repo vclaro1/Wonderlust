@@ -24,7 +24,7 @@ class LocationsController < ApplicationController
       marker.lat tip.latitude
       marker.lng tip.longitude
       marker.infowindow render_to_string(:partial => "/tips/infowindow", :locals => {:tip => tip, :user => current_user, :trip => @trip}) #:locals son las variables a usar en el partial, en el partial usar sender. 
-      marker.picture({:url  => "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png", :width =>  32, :height => 32})
+      marker.picture({:url  => "http://maps.google.com/mapfiles/ms/icons/blue.png", :width =>  32, :height => 32})
     end
   end
 
